@@ -1,7 +1,7 @@
 import {Aggregate} from './aggregate'
 import {MaybeStringType, VersionNumberType, MaybeVersionNumberType, MaybeBooleanType} from './types'
 import {MaybeLinkListJSONType} from './link'
-import {EmailValue, EmailValueType, URIValue, MaybeURIValueType} from 'value-objects'
+import {EmailValue, EmailValueType, URIValue, MaybeURIValueType} from '@rheactorjs/value-objects'
 import {String as StringType, Any as AnyType, Boolean as BooleanType, dict, maybe, refinement, irreducible, struct} from 'tcomb'
 const PreferencesType = dict(StringType, AnyType)
 

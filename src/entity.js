@@ -1,4 +1,4 @@
-import {URIValue, URIValueType} from 'value-objects'
+import {URIValue, URIValueType} from '@rheactorjs/value-objects'
 import {Model} from './model'
 import {MaybeDateType} from './types'
 import {MaybeLinkListJSONType} from './link'

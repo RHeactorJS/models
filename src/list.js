@@ -1,5 +1,5 @@
 import {Function as FunctionType, maybe, refinement, Integer as IntegerType, irreducible, String as StringType, struct, list} from 'tcomb'
-import {URIValue} from 'value-objects'
+import {URIValue} from '@rheactorjs/value-objects'
 import {Link, LinkListType, LinkJSONType} from './link'
 import {ModelListType} from './model'
 import {MaybeVersionNumberType} from './types'

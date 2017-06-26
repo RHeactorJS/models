@@ -2,7 +2,7 @@
 
 import {expect} from 'chai'
 import {Reference, ReferenceType, MaybeReferenceType, MaybeReferenceJSONType, Entity, Aggregate} from '../src'
-import {URIValue} from 'value-objects'
+import {URIValue} from '@rheactorjs/value-objects'
 
 function validateReference (reference) {
   ReferenceType(reference)

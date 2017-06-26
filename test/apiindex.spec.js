@@ -2,7 +2,7 @@
 
 import {expect} from 'chai'
 import {Link, Model, Index, IndexType, MaybeIndexType} from '../src'
-import {URIValue} from 'value-objects'
+import {URIValue} from '@rheactorjs/value-objects'
 
 const links = [
   new Link(

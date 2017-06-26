@@ -1,5 +1,5 @@
 import {String as StringType, Date as DateType, maybe, refinement, irreducible, struct} from 'tcomb'
-import {URIValue} from 'value-objects'
+import {URIValue} from '@rheactorjs/value-objects'
 import {Model} from './model'
 import {MaybeVersionNumberType} from './types'
 

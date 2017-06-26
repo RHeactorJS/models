@@ -1,4 +1,4 @@
-import {URIValue, URIValueType} from 'value-objects'
+import {URIValue, URIValueType} from '@rheactorjs/value-objects'
 import {MaybeVersionNumberType} from './types'
 import {EntityType} from './entity'
 import {maybe, refinement, irreducible, String as StringType, struct} from 'tcomb'

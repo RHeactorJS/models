@@ -2,7 +2,7 @@
 
 import {expect} from 'chai'
 import {Link, LinkType, MaybeLinkType, MaybeLinkJSONType} from '../src'
-import {URIValue} from 'value-objects'
+import {URIValue} from '@rheactorjs/value-objects'
 
 function validateLink (link) {
   LinkType(link)

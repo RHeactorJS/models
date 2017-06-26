@@ -2,7 +2,7 @@
 
 import {expect} from 'chai'
 import {Link, Model, List, ListType, MaybeListType, MaybeListJSONType} from '../src'
-import {URIValue} from 'value-objects'
+import {URIValue} from '@rheactorjs/value-objects'
 
 const items = [new Model({
   $context: new URIValue('http://example.com/jsonld/some'),

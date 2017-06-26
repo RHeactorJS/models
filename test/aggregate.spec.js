@@ -2,7 +2,7 @@
 
 import {expect} from 'chai'
 import {Aggregate, AggregateType, MaybeAggregateType, MaybeAggregateJSONType} from '../src'
-import {URIValue} from 'value-objects'
+import {URIValue} from '@rheactorjs/value-objects'
 
 const $context = new URIValue('http://example.com/jsonld/some')
 

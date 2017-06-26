@@ -1,6 +1,6 @@
 /* global describe, it */
 import {JsonWebToken, JsonWebTokenType, MaybeJsonWebTokenType, Link, MaybeJsonWebTokenJSONType} from '../src'
-import {URIValue} from 'value-objects'
+import {URIValue} from '@rheactorjs/value-objects'
 import {expect} from 'chai'
 import jwt from 'jsonwebtoken'
 

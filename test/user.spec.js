@@ -1,7 +1,7 @@
 /* global describe, it */
 import {expect} from 'chai'
 import {User, UserType, MaybeUserType, MaybeUserJSONType} from '../src'
-import {URIValue, EmailValue} from 'value-objects'
+import {URIValue, EmailValue} from '@rheactorjs/value-objects'
 
 const $context = new URIValue('https://github.com/RHeactorJS/models#User')
 

@@ -1,5 +1,5 @@
 import {Boolean as BooleanType, maybe, refinement, irreducible, String as StringType, struct, list} from 'tcomb'
-import {URIValue, URIValueType} from 'value-objects'
+import {URIValue, URIValueType} from '@rheactorjs/value-objects'
 import {MaybeStringType, MaybeVersionNumberType} from './types'
 
 const $context = new URIValue('https://github.com/RHeactorJS/models#Link')
