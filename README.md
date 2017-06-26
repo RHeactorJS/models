@@ -1,19 +1,19 @@
-# rheactor-models
+# models
 
-[![Build Status](https://travis-ci.org/ResourcefulHumans/rheactor-models.svg?branch=master)](https://travis-ci.org/ResourcefulHumans/rheactor-models)
+[![Build Status](https://travis-ci.org/RHeactorJS/models.svg?branch=master)](https://travis-ci.org/RHeactorJS/models)
 [![monitored by greenkeeper.io](https://img.shields.io/badge/greenkeeper.io-monitored-brightgreen.svg)](http://greenkeeper.io/) 
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 [![semantic-release](https://img.shields.io/badge/semver-semantic%20release-e10079.svg)](https://github.com/semantic-release/semantic-release)
-[![Test Coverage](https://codeclimate.com/github/ResourcefulHumans/rheactor-models/badges/coverage.svg)](https://codeclimate.com/github/ResourcefulHumans/rheactor-models/coverage)
-[![Code Climate](https://codeclimate.com/github/ResourcefulHumans/rheactor-models/badges/gpa.svg)](https://codeclimate.com/github/ResourcefulHumans/rheactor-models)
+[![Test Coverage](https://codeclimate.com/github/RHeactorJS/models/badges/coverage.svg)](https://codeclimate.com/github/RHeactorJS/models/coverage)
+[![Code Climate](https://codeclimate.com/github/RHeactorJS/models/badges/gpa.svg)](https://codeclimate.com/github/RHeactorJS/models)
 
-[![NPM](https://nodei.co/npm/rheactor-models.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/rheactor-models/)
+[![NPM](https://nodei.co/npm/models.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/models/)
 
 A collection of models.
 
 ## JSON-LD
 
-> :information_source: See also: [RESTful API in `rheactor-server`](https://github.com/ResourcefulHumans/rheactor-server/blob/master/README.md#restful-api)
+> :information_source: See also: [RESTful API in `server`](https://github.com/RHeactorJS/server/blob/master/README.md#restful-api)
 
 ### `$context`
 

@@ -2,7 +2,7 @@
 
 import {expect} from 'chai'
 import {Link, LinkType, MaybeLinkType, MaybeLinkJSONType} from '../src'
-import {URIValue} from 'rheactor-value-objects'
+import {URIValue} from 'value-objects'
 
 function validateLink (link) {
   LinkType(link)
@@ -52,7 +52,7 @@ describe('Link', () => {
 
   describe('$context', () => {
     it('should exist', () => {
-      expect(Link.$context.toString()).to.equal('https://github.com/ResourcefulHumans/rheactor-models#Link')
+      expect(Link.$context.toString()).to.equal('https://github.com/RHeactorJS/models#Link')
     })
   })
 })

@@ -1,9 +1,9 @@
 import {list, maybe, refinement, irreducible, String as StringType, struct} from 'tcomb'
-import {URIValue} from 'rheactor-value-objects'
+import {URIValue} from 'value-objects'
 import {Link, LinkType, LinkListJSONType} from './link'
 import {MaybeVersionNumberType} from './types'
 
-const $context = new URIValue('https://github.com/ResourcefulHumans/rheactor-models#Index')
+const $context = new URIValue('https://github.com/RHeactorJS/models#Index')
 const $contextVersion = 1
 
 export class Index {

@@ -2,7 +2,7 @@
 
 import {expect} from 'chai'
 import {Link, Model, List, ListType, MaybeListType, MaybeListJSONType} from '../src'
-import {URIValue} from 'rheactor-value-objects'
+import {URIValue} from 'value-objects'
 
 const items = [new Model({
   $context: new URIValue('http://example.com/jsonld/some'),
@@ -111,7 +111,7 @@ describe('List', () => {
 
   describe('$context', () => {
     it('should exist', () => {
-      expect(List.$context.toString()).to.equal('https://github.com/ResourcefulHumans/rheactor-models#List')
+      expect(List.$context.toString()).to.equal('https://github.com/RHeactorJS/models#List')
     })
   })
 })

@@ -1,9 +1,9 @@
 /* global describe, it */
 import {expect} from 'chai'
 import {User, UserType, MaybeUserType, MaybeUserJSONType} from '../src'
-import {URIValue, EmailValue} from 'rheactor-value-objects'
+import {URIValue, EmailValue} from 'value-objects'
 
-const $context = new URIValue('https://github.com/ResourcefulHumans/rheactor-models#User')
+const $context = new URIValue('https://github.com/RHeactorJS/models#User')
 
 function validateUser (user) {
   UserType(user)
@@ -94,7 +94,7 @@ describe('User', () => {
 
   describe('$context', () => {
     it('should exist', () => {
-      expect(User.$context.toString()).to.equal('https://github.com/ResourcefulHumans/rheactor-models#User')
+      expect(User.$context.toString()).to.equal('https://github.com/RHeactorJS/models#User')
     })
   })
 

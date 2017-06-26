@@ -1,7 +1,7 @@
 /* global describe, it */
 
 import {HttpProblem, HttpProblemType, MaybeHttpProblemType} from '../src'
-import {URIValue} from 'rheactor-value-objects'
+import {URIValue} from 'value-objects'
 import {expect} from 'chai'
 
 function validateProblem (problem) {

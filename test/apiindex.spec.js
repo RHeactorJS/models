@@ -2,7 +2,7 @@
 
 import {expect} from 'chai'
 import {Link, Model, Index, IndexType, MaybeIndexType} from '../src'
-import {URIValue} from 'rheactor-value-objects'
+import {URIValue} from 'value-objects'
 
 const links = [
   new Link(
@@ -49,7 +49,7 @@ describe('Index', () => {
 
   describe('$context', () => {
     it('should exist', () => {
-      expect(Index.$context.toString()).to.equal('https://github.com/ResourcefulHumans/rheactor-models#Index')
+      expect(Index.$context.toString()).to.equal('https://github.com/RHeactorJS/models#Index')
     })
   })
 })

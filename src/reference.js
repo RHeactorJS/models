@@ -1,9 +1,9 @@
-import {URIValue, URIValueType} from 'rheactor-value-objects'
+import {URIValue, URIValueType} from 'value-objects'
 import {MaybeVersionNumberType} from './types'
 import {EntityType} from './entity'
 import {maybe, refinement, irreducible, String as StringType, struct} from 'tcomb'
 
-const $context = new URIValue('https://github.com/ResourcefulHumans/rheactor-models#Reference')
+const $context = new URIValue('https://github.com/RHeactorJS/models#Reference')
 const $contextVersion = 1
 
 export class Reference {

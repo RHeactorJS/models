@@ -1,5 +1,5 @@
 {
-  "name": "rheactor-models",
+  "name": "@rheactorjs/models",
   "description": "A collection of models",
   "version": "0.0.0-development",
   "main": "dist/index.js",
@@ -12,23 +12,26 @@
     "commitmsg": "validate-commit-msg",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ResourcefulHumans/rheactor-models.git"
+    "url": "https://github.com/RHeactorJS/models.git"
   },
   "author": "Resourceful Humans GmbH <info@resourceful-humans.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ResourcefulHumans/rheactor-models/issues"
+    "url": "https://github.com/RHeactorJS/models/issues"
   },
-  "homepage": "https://github.com/ResourcefulHumans/rheactor-models#readme",
+  "homepage": "https://github.com/RHeactorJS/models#readme",
   "dependencies": {
     "base-64": "^0.1.0"
   },
   "peerDependencies": {
-    "@resourcefulhumans/rheactor-errors": "1.x",
+    "@rheactorjs/errors": "1.x",
     "tcomb": "^3.2.16",
-    "rheactor-value-objects": "^10.0.0"
+    "@rheactorjs/value-objects": "^10.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.23.0",

@@ -2,7 +2,7 @@
 
 import {expect} from 'chai'
 import {Reference, ReferenceType, MaybeReferenceType, MaybeReferenceJSONType, Entity, Aggregate} from '../src'
-import {URIValue} from 'rheactor-value-objects'
+import {URIValue} from 'value-objects'
 
 function validateReference (reference) {
   ReferenceType(reference)
@@ -38,7 +38,7 @@ describe('Reference', () => {
 
   describe('$context', () => {
     it('should exist', () => {
-      expect(Reference.$context.toString()).to.equal('https://github.com/ResourcefulHumans/rheactor-models#Reference')
+      expect(Reference.$context.toString()).to.equal('https://github.com/RHeactorJS/models#Reference')
     })
   })
 

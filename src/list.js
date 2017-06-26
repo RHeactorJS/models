@@ -1,10 +1,10 @@
 import {Function as FunctionType, maybe, refinement, Integer as IntegerType, irreducible, String as StringType, struct, list} from 'tcomb'
-import {URIValue} from 'rheactor-value-objects'
+import {URIValue} from 'value-objects'
 import {Link, LinkListType, LinkJSONType} from './link'
 import {ModelListType} from './model'
 import {MaybeVersionNumberType} from './types'
 
-const $context = new URIValue('https://github.com/ResourcefulHumans/rheactor-models#List')
+const $context = new URIValue('https://github.com/RHeactorJS/models#List')
 const $contextVersion = 1
 
 export class List {

@@ -30,7 +30,7 @@ describe('Status', function () {
 
   describe('$context', () => {
     it('should exist', () => {
-      expect(Status.$context.toString()).to.equal('https://github.com/ResourcefulHumans/rheactor-models#Status')
+      expect(Status.$context.toString()).to.equal('https://github.com/RHeactorJS/models#Status')
     })
   })
 

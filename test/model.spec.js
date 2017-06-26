@@ -1,7 +1,7 @@
 /* global describe, it */
 import {expect} from 'chai'
 import {Model, ModelType, MaybeModelType, MaybeModelJSONType} from '../src'
-import {URIValue} from 'rheactor-value-objects'
+import {URIValue} from 'value-objects'
 
 const $context = new URIValue('http://example.com/jsonld/some')
 

@@ -1,9 +1,9 @@
 import {String as StringType, Date as DateType, maybe, refinement, irreducible, struct} from 'tcomb'
-import {URIValue} from 'rheactor-value-objects'
+import {URIValue} from 'value-objects'
 import {Model} from './model'
 import {MaybeVersionNumberType} from './types'
 
-const $context = new URIValue('https://github.com/ResourcefulHumans/rheactor-models#Status')
+const $context = new URIValue('https://github.com/RHeactorJS/models#Status')
 const $contextVersion = 1
 
 export class Status extends Model {
