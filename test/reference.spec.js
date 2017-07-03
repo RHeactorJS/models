@@ -1,7 +1,7 @@
 /* global describe, it */
 
 import {expect} from 'chai'
-import {Reference, ReferenceType, MaybeReferenceType, MaybeReferenceJSONType, Entity, Aggregate} from '../src'
+import {Reference, ReferenceType, MaybeReferenceType, MaybeReferenceJSONType, Entity, ImmutableAggregate} from '../src'
 import {URIValue} from '@rheactorjs/value-objects'
 
 function validateReference (reference) {
@@ -52,7 +52,7 @@ describe('Reference', () => {
     })
 
     it('should create an instance from an aggregate', () => {
-      const aggregate = new Aggregate({
+      const aggregate = new ImmutableAggregate({
         $id: new URIValue('http://example.com/some-item/42'),
         $context: new URIValue('http://example.com/jsonld/some'),
         $version: 17,

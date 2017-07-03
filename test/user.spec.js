@@ -68,7 +68,7 @@ describe('User', () => {
         lastname: 'Doe',
         preferences: {'foo': 'bar', 'baz': [1, 2, 3]}
       })
-      const updated = user.updated()
+      const updated = user.updated({})
       expect(user.$version).to.equal(17)
       expect(updated.$version).to.equal(18)
       expect(updated).to.be.not.equal(user)

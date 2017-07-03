@@ -1,4 +1,4 @@
-import {Aggregate} from './aggregate'
+import {ImmutableAggregate} from './immutable-aggregate'
 import {MaybeStringType, VersionNumberType, MaybeVersionNumberType, MaybeBooleanType} from './types'
 import {MaybeLinkListJSONType} from './link'
 import {EmailValue, EmailValueType, URIValue, MaybeURIValueType} from '@rheactorjs/value-objects'
@@ -8,7 +8,7 @@ const PreferencesType = dict(StringType, AnyType)
 const $context = new URIValue('https://github.com/RHeactorJS/models#User')
 const $contextVersion = 2
 
-export class User extends Aggregate {
+export class User extends ImmutableAggregate {
   /**
    * @param {{$id: URIValue, $version: Number, $createdAt: Date|undefined, $updatedAt: Date|undefined, $deletedAt: Date|undefined, email: EmailValue, firstname: String|undefined, lastname: String|undefined, avatar: URIValue|undefined, superUser: Boolean|undefined, active: Boolean|undefined, preferences: Object|undefined}} fields
    */
@@ -84,7 +84,7 @@ export class User extends Aggregate {
    * @returns {boolean}
    */
   static is (x) {
-    return (x instanceof User) || (Aggregate.is(x) && '$context' in x && URIValue.is(x.$context) && $context.equals(x.$context))
+    return (x instanceof User) || (ImmutableAggregate.is(x) && '$context' in x && URIValue.is(x.$context) && $context.equals(x.$context))
   }
 }
 
