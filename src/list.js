@@ -92,23 +92,13 @@ export class List {
   static get $contextVersion () {
     return $contextVersion
   }
-
-  /**
-   * Returns true if x is of type List
-   *
-   * @param {object} x
-   * @returns {boolean}
-   */
-  static is (x) {
-    return (x instanceof List) || (x && x.constructor && x.constructor.name === List.name && '$context' in x && URIValue.is(x.$context) && $context.equals(x.$context))
-  }
 }
 
 export const PositiveIntegerType = refinement(IntegerType, n => n > 0, 'PositiveIntegerType')
 export const ZeroOrPositiveIntegerType = refinement(IntegerType, n => n >= 0, 'ZeroOrPositiveIntegerType')
 export const MaybeZeroOrPositiveIntegerType = maybe(ZeroOrPositiveIntegerType)
 
-export const ListType = irreducible('ListType', List.is)
+export const ListType = irreducible('ListType', x => x instanceof List)
 export const MaybeListType = maybe(ListType)
 export const ListJSONType = struct({
   $context: refinement(StringType, s => s === List.$context.toString(), 'ListContext'),

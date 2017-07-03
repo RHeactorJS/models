@@ -97,19 +97,9 @@ export class JsonWebToken extends Model {
   static get $contextVersion () {
     return $contextVersion
   }
-
-  /**
-   * Returns true if x is of type JsonWebToken
-   *
-   * @param {object} x
-   * @returns {boolean}
-   */
-  static is (x) {
-    return (x instanceof JsonWebToken) || (x && x.constructor && x.constructor.name === JsonWebToken.name && '$context' in x && URIValue.is(x.$context) && $context.equals(x.$context))
-  }
 }
 
-export const JsonWebTokenType = irreducible('JsonWebTokenType', JsonWebToken.is)
+export const JsonWebTokenType = irreducible('JsonWebTokenType', x => x instanceof JsonWebToken)
 export const JsonWebTokenJSONType = struct({
   $context: refinement(StringType, s => s === JsonWebToken.$context.toString(), 'JsonWebTokenContext'),
   $contextVersion: MaybeVersionNumberType,

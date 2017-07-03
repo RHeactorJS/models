@@ -76,19 +76,9 @@ export class User extends ImmutableAggregate {
   static get $contextVersion () {
     return $contextVersion
   }
-
-  /**
-   * Returns true if x is of type User
-   *
-   * @param {object} x
-   * @returns {boolean}
-   */
-  static is (x) {
-    return (x instanceof User) || (ImmutableAggregate.is(x) && '$context' in x && URIValue.is(x.$context) && $context.equals(x.$context))
-  }
 }
 
-export const UserType = irreducible('UserType', User.is)
+export const UserType = irreducible('UserType', x => x instanceof User)
 export const MaybeUserType = maybe(UserType)
 export const UserJSONType = struct({
   $context: refinement(StringType, s => s === User.$context.toString(), 'UserContext'),

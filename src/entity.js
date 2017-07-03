@@ -72,19 +72,9 @@ export class Entity extends Model {
     }
     return this.$createdAt
   }
-
-  /**
-   * Returns true if x is of type Entity
-   *
-   * @param {object} x
-   * @returns {boolean}
-   */
-  static is (x) {
-    return (x instanceof Entity) || (Model.is(x) && '$id' in x && '$createdAt' in x && '$updatedAt' in x && '$deletedAt' in x)
-  }
 }
 
-export const EntityType = irreducible('EntityType', Entity.is)
+export const EntityType = irreducible('EntityType', x => x instanceof Entity)
 export const MaybeEntityType = maybe(EntityType)
 export const EntityJSONType = struct({
   $context: StringType,

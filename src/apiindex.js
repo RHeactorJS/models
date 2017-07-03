@@ -49,19 +49,9 @@ export class Index {
   static get $contextVersion () {
     return $contextVersion
   }
-
-  /**
-   * Returns true if x is of type Index
-   *
-   * @param {object} x
-   * @returns {boolean}
-   */
-  static is (x) {
-    return (x instanceof Index) || (x && x.constructor && x.constructor.name === Index.name && '$context' in x && URIValue.is(x.$context) && $context.equals(x.$context))
-  }
 }
 
-export const IndexType = irreducible('IndexType', Index.is)
+export const IndexType = irreducible('IndexType', x => x instanceof Index)
 export const LinkIndexType = list(LinkType)
 export const MaybeIndexType = maybe(IndexType)
 export const IndexJSONType = struct({

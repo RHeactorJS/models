@@ -59,19 +59,9 @@ export class Link {
   static get $contextVersion () {
     return $contextVersion
   }
-
-  /**
-   * Returns true if x is of type Link
-   *
-   * @param {object} x
-   * @returns {boolean}
-   */
-  static is (x) {
-    return (x instanceof Link) || (x && x.constructor && x.constructor.name === Link.name && '$context' in x && URIValue.is(x.$context) && $context.equals(x.$context))
-  }
 }
 
-export const LinkType = irreducible('LinkType', Link.is)
+export const LinkType = irreducible('LinkType', x => x instanceof Link)
 export const MaybeLinkType = maybe(LinkType)
 export const LinkListType = list(LinkType)
 export const MaybeLinkListType = maybe(LinkListType)

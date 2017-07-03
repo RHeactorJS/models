@@ -56,19 +56,9 @@ export class Status extends Model {
   static get $contextVersion () {
     return $contextVersion
   }
-
-  /**
-   * Returns true if x is of type Status
-   *
-   * @param {object} x
-   * @returns {boolean}
-   */
-  static is (x) {
-    return (x instanceof Status) || (x && x.constructor && x.constructor.name === Status.name && '$context' in x && URIValue.is(x.$context) && $context.equals(x.$context))
-  }
 }
 
-export const StatusType = irreducible('StatusType', Status.is)
+export const StatusType = irreducible('StatusType', x => x instanceof Status)
 export const MaybeStatusType = maybe(StatusType)
 export const StatusJSONType = struct({
   $context: refinement(StringType, s => s === Status.$context.toString(), 'StatusContext'),

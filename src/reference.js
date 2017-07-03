@@ -62,19 +62,9 @@ export class Reference {
   static get $contextVersion () {
     return $contextVersion
   }
-
-  /**
-   * Returns true if x is of type Reference
-   *
-   * @param {object} x
-   * @returns {boolean}
-   */
-  static is (x) {
-    return (x instanceof Reference) || (x && x.constructor && x.constructor.name === Reference.name && '$context' in x && URIValue.is(x.$context) && $context.equals(x.$context))
-  }
 }
 
-export const ReferenceType = irreducible('ReferenceType', Reference.is)
+export const ReferenceType = irreducible('ReferenceType', x => x instanceof Reference)
 export const MaybeReferenceType = maybe(ReferenceType)
 export const ReferenceJSONType = struct({
   $context: refinement(StringType, s => s === Reference.$context.toString(), 'ReferenceContext'),

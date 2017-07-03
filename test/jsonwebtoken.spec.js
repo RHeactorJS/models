@@ -77,7 +77,7 @@ describe('JsonWebToken', function () {
         'token-verify'
       )
       ]))))
-      expect(Link.is(webtoken.$links[0]), 'it should be a link').to.equal(true)
+      expect(webtoken.$links[0] instanceof Link, 'it should be a link').to.equal(true)
       expect(webtoken.$links[0].rel).to.equal('token-verify')
       expect(webtoken.$links[0].list, 'it should not be a list').to.equal(false)
       expect(webtoken.$links[0].$context.equals(Link.$context), 'it should be a link').to.equal(true)

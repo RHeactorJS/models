@@ -64,19 +64,9 @@ export class ImmutableAggregate extends Entity {
       })
     )
   }
-
-  /**
-   * Returns true if x is of type ImmutableAggregate
-   *
-   * @param {object} x
-   * @returns {boolean}
-   */
-  static is (x) {
-    return (x instanceof ImmutableAggregate) || (Entity.is(x) && '$version' in x)
-  }
 }
 
-export const ImmutableAggregateType = irreducible('ImmutableAggregateType', ImmutableAggregate.is)
+export const ImmutableAggregateType = irreducible('ImmutableAggregateType', x => x instanceof ImmutableAggregate)
 export const MaybeImmutableAggregateType = maybe(ImmutableAggregateType)
 export const ImmutableAggregateJSONType = struct({
   $context: StringType,
