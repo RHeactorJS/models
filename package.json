@@ -26,9 +26,6 @@
   },
   "homepage": "https://github.com/RHeactorJS/models#readme",
   "dependencies": {
-    "base-64": "^0.1.0"
-  },
-  "dependencies": {
     "@rheactorjs/errors": "1.x",
     "@rheactorjs/value-objects": "1.x",
     "tcomb": "^3.2.16"
