@@ -78,7 +78,7 @@ export class User extends ImmutableAggregate {
   }
 }
 
-export const UserType = irreducible('UserType', x => x instanceof User)
+export const UserType = irreducible('UserType', x => x.constructor.name === User.name && '$context' in x && x.$context.toString() === $context.toString() && '$contextVersion' in x && x.$contextVersion === $contextVersion)
 export const MaybeUserType = maybe(UserType)
 export const UserJSONType = struct({
   $context: refinement(StringType, s => s === User.$context.toString(), 'UserContext'),

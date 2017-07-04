@@ -7,11 +7,7 @@ import {Link, MaybeLinkListJSONType} from './link'
 let atobImpl
 
 if (typeof atob === 'undefined') {
-  if (typeof Buffer !== 'undefined') {
-    atobImpl = (str) => Buffer.from(str, 'base64').toString('binary')
-  } else {
-    atobImpl = require('base-64').decode
-  }
+  atobImpl = (str) => Buffer.from(str, 'base64').toString('binary')
 } else {
   /* globals atob */
   atobImpl = atob
@@ -99,7 +95,7 @@ export class JsonWebToken extends Model {
   }
 }
 
-export const JsonWebTokenType = irreducible('JsonWebTokenType', x => x instanceof JsonWebToken)
+export const JsonWebTokenType = irreducible('JsonWebTokenType', x => x.constructor.name === JsonWebToken.name && '$context' in x && x.$context.toString() === $context.toString() && '$contextVersion' in x && x.$contextVersion === $contextVersion)
 export const JsonWebTokenJSONType = struct({
   $context: refinement(StringType, s => s === JsonWebToken.$context.toString(), 'JsonWebTokenContext'),
   $contextVersion: MaybeVersionNumberType,

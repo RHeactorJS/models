@@ -61,7 +61,7 @@ export class Link {
   }
 }
 
-export const LinkType = irreducible('LinkType', x => x instanceof Link)
+export const LinkType = irreducible('LinkType', x => x.constructor.name === Link.name && '$context' in x && x.$context.toString() === $context.toString() && '$contextVersion' in x && x.$contextVersion === $contextVersion)
 export const MaybeLinkType = maybe(LinkType)
 export const LinkListType = list(LinkType)
 export const MaybeLinkListType = maybe(LinkListType)

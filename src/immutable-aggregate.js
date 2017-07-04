@@ -1,4 +1,4 @@
-import {Entity} from './entity'
+import {Entity, EntityType} from './entity'
 import {String as StringType, Date as DateType, Any as AnyType, dict, maybe, irreducible, struct} from 'tcomb'
 import {MaybeStringType, VersionNumberType, MaybeVersionNumberType} from './types'
 import {MaybeLinkListJSONType} from './link'
@@ -66,7 +66,10 @@ export class ImmutableAggregate extends Entity {
   }
 }
 
-export const ImmutableAggregateType = irreducible('ImmutableAggregateType', x => x instanceof ImmutableAggregate)
+export const ImmutableAggregateType = irreducible('ImmutableAggregateType', x => {
+  EntityType(x, 'ImmutableAggregateType()', 'x:Entity')
+  return '$version' in x
+})
 export const MaybeImmutableAggregateType = maybe(ImmutableAggregateType)
 export const ImmutableAggregateJSONType = struct({
   $context: StringType,

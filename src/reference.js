@@ -64,7 +64,7 @@ export class Reference {
   }
 }
 
-export const ReferenceType = irreducible('ReferenceType', x => x instanceof Reference)
+export const ReferenceType = irreducible('ReferenceType', x => x.constructor.name === Reference.name && '$context' in x && x.$context.toString() === $context.toString() && '$contextVersion' in x && x.$contextVersion === $contextVersion)
 export const MaybeReferenceType = maybe(ReferenceType)
 export const ReferenceJSONType = struct({
   $context: refinement(StringType, s => s === Reference.$context.toString(), 'ReferenceContext'),

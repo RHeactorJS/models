@@ -98,7 +98,7 @@ export const PositiveIntegerType = refinement(IntegerType, n => n > 0, 'Positive
 export const ZeroOrPositiveIntegerType = refinement(IntegerType, n => n >= 0, 'ZeroOrPositiveIntegerType')
 export const MaybeZeroOrPositiveIntegerType = maybe(ZeroOrPositiveIntegerType)
 
-export const ListType = irreducible('ListType', x => x instanceof List)
+export const ListType = irreducible('ListType', x => x.constructor.name === List.name && '$context' in x && x.$context.toString() === $context.toString() && '$contextVersion' in x && x.$contextVersion === $contextVersion)
 export const MaybeListType = maybe(ListType)
 export const ListJSONType = struct({
   $context: refinement(StringType, s => s === List.$context.toString(), 'ListContext'),

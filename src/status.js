@@ -58,7 +58,7 @@ export class Status extends Model {
   }
 }
 
-export const StatusType = irreducible('StatusType', x => x instanceof Status)
+export const StatusType = irreducible('StatusType', x => x.constructor.name === Status.name && '$context' in x && x.$context.toString() === $context.toString() && '$contextVersion' in x && x.$contextVersion === $contextVersion)
 export const MaybeStatusType = maybe(StatusType)
 export const StatusJSONType = struct({
   $context: refinement(StringType, s => s === Status.$context.toString(), 'StatusContext'),

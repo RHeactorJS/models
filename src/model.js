@@ -1,7 +1,7 @@
-import {URIValue, URIValueType} from '@rheactorjs/value-objects'
-import {VersionNumberType, MaybeVersionNumberType} from './types'
-import {Link, LinkListType, MaybeLinkListJSONType} from './link'
-import {maybe, irreducible, String as StringType, struct, list} from 'tcomb'
+import { URIValue, URIValueType } from '@rheactorjs/value-objects'
+import { VersionNumberType, MaybeVersionNumberType } from './types'
+import { Link, LinkListType, MaybeLinkListJSONType } from './link'
+import { maybe, irreducible, String as StringType, struct, list } from 'tcomb'
 
 export class Model {
   /**
@@ -39,7 +39,7 @@ export class Model {
   }
 }
 
-export const ModelType = irreducible('ModelType', x => x instanceof Model)
+export const ModelType = irreducible('ModelType', x => '$context' in x && '$contextVersion' in x && '$links' in x)
 export const ModelListType = list(ModelType)
 export const MaybeModelType = maybe(ModelType)
 export const ModelJSONType = struct({

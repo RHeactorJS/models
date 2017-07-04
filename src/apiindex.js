@@ -51,8 +51,8 @@ export class Index {
   }
 }
 
-export const IndexType = irreducible('IndexType', x => x instanceof Index)
 export const LinkIndexType = list(LinkType)
+export const IndexType = irreducible('IndexType', x => x.constructor.name === Index.name && '$context' in x && x.$context.toString() === $context.toString() && '$contextVersion' in x && x.$contextVersion === $contextVersion)
 export const MaybeIndexType = maybe(IndexType)
 export const IndexJSONType = struct({
   $context: refinement(StringType, s => s === Index.$context.toString(), 'IndexContext'),

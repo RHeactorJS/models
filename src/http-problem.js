@@ -75,7 +75,7 @@ HttpProblem.prototype.toJSON = function () {
 }
 
 export const HttpStatusCodeType = refinement(IntegerType, n => n >= 100 && n < 600, 'HttpStatusCodeType')
-export const HttpProblemType = irreducible('HttpProblemType', x => x instanceof HttpProblem)
+export const HttpProblemType = irreducible('HttpProblemType', x => '$context' in x && x.$context.toString() === $context.toString() && '$contextVersion' in x && x.$contextVersion === $contextVersion)
 export const MaybeHttpProblemType = maybe(HttpProblemType)
 export const HttpProblemJSONType = struct({
   $context: refinement(StringType, s => s === HttpProblem.$context.toString(), 'HttpProblemContext'),

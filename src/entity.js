@@ -1,5 +1,5 @@
 import {URIValue, URIValueType} from '@rheactorjs/value-objects'
-import {Model} from './model'
+import {Model, ModelType} from './model'
 import {MaybeDateType} from './types'
 import {MaybeLinkListJSONType} from './link'
 import {maybe, irreducible, String as StringType, struct} from 'tcomb'
@@ -74,7 +74,14 @@ export class Entity extends Model {
   }
 }
 
-export const EntityType = irreducible('EntityType', x => x instanceof Entity)
+export const EntityType = irreducible('EntityType', x => {
+  ModelType(x, 'EntityType()', 'x:Model')
+  return '$id' in x &&
+    '$createdAt' in x &&
+    '$updatedAt' in x &&
+    '$deletedAt' in x &&
+    '$modifiedAt' in x
+})
 export const MaybeEntityType = maybe(EntityType)
 export const EntityJSONType = struct({
   $context: StringType,
