@@ -1,5 +1,7 @@
 # models
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/RHeactorJS/models.svg)](https://greenkeeper.io/)
+
 [![npm version](https://img.shields.io/npm/v/@rheactorjs/models.svg)](https://www.npmjs.com/package/@rheactorjs/models)
 [![Build Status](https://travis-ci.org/RHeactorJS/models.svg?branch=master)](https://travis-ci.org/RHeactorJS/models)
 [![monitored by greenkeeper.io](https://img.shields.io/badge/greenkeeper.io-monitored-brightgreen.svg)](http://greenkeeper.io/) 
