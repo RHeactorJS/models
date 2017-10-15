@@ -9,7 +9,7 @@
     "test:coverage-travis": "npm run test:coverage && codeclimate-test-reporter < ./coverage/lcov.info && rm -rf ./coverage",
     "lint": "standard",
     "precommit": "npm run lint && npm test",
-    "commitmsg": "validate-commit-msg",
+    "commitmsg": "commitlint -e",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "publishConfig": {
@@ -31,6 +31,8 @@
     "tcomb": "^3.2.16"
   },
   "devDependencies": {
+    "@commitlint/cli": "^4.2.0",
+    "@commitlint/config-angular": "^4.2.0",
     "babel-cli": "^6.23.0",
     "babel-plugin-transform-object-assign": "^6.22.0",
     "babel-preset-env": "^1.2.1",
@@ -45,8 +47,7 @@
     "mocha-lcov-reporter": "^1.3.0",
     "nyc": "^11.1.0",
     "semantic-release": "^8.0.0",
-    "standard": "^10.0.2",
-    "validate-commit-msg": "^2.11.2"
+    "standard": "^10.0.2"
   },
   "files": [
     "dist",
