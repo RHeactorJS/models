@@ -1,20 +1,21 @@
-/* global describe, it */
-import {JsonWebToken, JsonWebTokenType, MaybeJsonWebTokenType, Link, MaybeJsonWebTokenJSONType} from '../src'
-import {URIValue} from '@rheactorjs/value-objects'
-import {expect} from 'chai'
+/* global describe expect test it */
+import { JsonWebToken, JsonWebTokenType, MaybeJsonWebTokenType, Link, MaybeJsonWebTokenJSONType } from '../src'
+import { URIValue } from '@rheactorjs/value-objects'
 import jwt from 'jsonwebtoken'
 
+const toBeWithin = (v, a, b) => expect(v).toBeGreaterThanOrEqual(a) && expect(v).toBeLessThanOrEqual(b)
+
 function validateToken (webtoken) {
-  expect(webtoken).to.be.instanceof(JsonWebToken)
-  expect(webtoken.$context.toString()).to.be.equal('https://tools.ietf.org/html/rfc7519')
-  expect(webtoken.$contextVersion).to.be.equal(2)
-  expect(webtoken.iss).to.equal('test')
-  expect(webtoken.sub).to.equal('foo')
+  expect(webtoken).toBeInstanceOf(JsonWebToken)
+  expect(webtoken.$context.toString()).toEqual('https://tools.ietf.org/html/rfc7519')
+  expect(webtoken.$contextVersion).toEqual(2)
+  expect(webtoken.iss).toEqual('test')
+  expect(webtoken.sub).toEqual('foo')
   const nbfTime = Date.now() - 60000
-  expect(webtoken.nbf.getTime()).to.be.within(nbfTime - 1000, nbfTime + 1000)
-  expect(webtoken.payload).to.deep.equal({foo: 'bar'})
+  toBeWithin(webtoken.nbf.getTime(), nbfTime - 1000, nbfTime + 1000)
+  expect(webtoken.payload).toEqual({foo: 'bar'})
   const inOnHourinSeconds = Math.round((Date.now() + (60 * 60 * 1000)) / 1000)
-  expect(Math.round(new Date(webtoken.exp).getTime() / 1000)).to.be.within(inOnHourinSeconds - 10, inOnHourinSeconds + 10)
+  toBeWithin(Math.round(new Date(webtoken.exp).getTime() / 1000), inOnHourinSeconds - 10, inOnHourinSeconds + 10)
   jwt.verify(webtoken.token, 'mysecret')
 }
 
@@ -38,7 +39,7 @@ describe('JsonWebToken', function () {
     it('should return true if a token is expired', () => {
       const token = jwt.sign({foo: 'bar'}, 'mysecret', {algorithm: 'HS256', issuer: 'test', subject: 'foo', expiresIn: -10})
       const webtoken = new JsonWebToken(token)
-      expect(webtoken.isExpired()).to.equal(true)
+      expect(webtoken.isExpired()).toEqual(true)
     })
   })
 
@@ -53,22 +54,22 @@ describe('JsonWebToken', function () {
 
   describe('$context', () => {
     it('should exist', () => {
-      expect(JsonWebToken.$context.toString()).to.equal('https://tools.ietf.org/html/rfc7519')
+      expect(JsonWebToken.$context.toString()).toEqual('https://tools.ietf.org/html/rfc7519')
     })
   })
 
   describe('$contextVersion', () => {
     it('should exist', () => {
-      expect(JsonWebToken.$contextVersion).to.be.equal(2)
+      expect(JsonWebToken.$contextVersion).toEqual(2)
     })
     it('should be contained in the JSON', () => {
       const token = jwt.sign({foo: 'bar'}, 'mysecret', {algorithm: 'HS256', issuer: 'test', subject: 'foo', expiresIn: 60 * 60, notBefore: -60})
-      expect(new JsonWebToken(token).toJSON().$contextVersion).to.equal(2)
+      expect(new JsonWebToken(token).toJSON().$contextVersion).toEqual(2)
     })
   })
 
   describe('$links', () => {
-    it('should parse links', () => {
+    describe('should parse links', () => {
       const token = jwt.sign({foo: 'bar'}, 'mysecret', {algorithm: 'HS256', issuer: 'test', subject: 'foo', expiresIn: 60 * 60, notBefore: -60})
       const webtoken = JsonWebToken.fromJSON(JSON.parse(JSON.stringify(new JsonWebToken(token, [new Link(
         new URIValue('http://127.0.0.1:8080/api/token/verify'),
@@ -77,12 +78,22 @@ describe('JsonWebToken', function () {
         'token-verify'
       )
       ]))))
-      expect(webtoken.$links[0] instanceof Link, 'it should be a link').to.equal(true)
-      expect(webtoken.$links[0].rel).to.equal('token-verify')
-      expect(webtoken.$links[0].list, 'it should not be a list').to.equal(false)
-      expect(webtoken.$links[0].$context.equals(Link.$context), 'it should be a link').to.equal(true)
-      expect(webtoken.$links[0].subject.equals(new URIValue('https://tools.ietf.org/html/rfc7519')), 'subject should match').to.equal(true)
-      expect(webtoken.$links[0].href.equals(new URIValue('http://127.0.0.1:8080/api/token/verify')), 'href should match').to.equal(true)
+      test('it should be a link', () => {
+        expect(webtoken.$links[0] instanceof Link).toEqual(true)
+        expect(webtoken.$links[0].rel).toEqual('token-verify')
+      })
+      test('it should not be a list', () => {
+        expect(webtoken.$links[0].list).toEqual(false)
+      })
+      test('it should be a link', () => {
+        expect(webtoken.$links[0].$context.equals(Link.$context)).toEqual(true)
+      })
+      test('subject should match', () => {
+        expect(webtoken.$links[0].subject.equals(new URIValue('https://tools.ietf.org/html/rfc7519'))).toEqual(true)
+      })
+      test('href should match', () => {
+        expect(webtoken.$links[0].href.equals(new URIValue('http://127.0.0.1:8080/api/token/verify'))).toEqual(true)
+      })
     })
   })
 })

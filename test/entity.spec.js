@@ -1,6 +1,5 @@
-/* global describe, it */
+/* global describe expect, it */
 
-import {expect} from 'chai'
 import {Entity, EntityType, MaybeEntityType, MaybeEntityJSONType} from '../src'
 import {URIValue} from '@rheactorjs/value-objects'
 
@@ -8,12 +7,12 @@ const $context = new URIValue('http://example.com/jsonld/some')
 
 function validateEntity (entity) {
   EntityType(entity)
-  expect(entity.$id.equals(new URIValue('http://example.com/some-id'))).to.equal(true)
-  expect(entity.$context.equals($context)).to.equal(true)
-  expect(entity.$createdAt.toISOString()).to.equal(new Date('2016-01-01T00:00:00Z').toISOString())
-  expect(entity.$updatedAt.toISOString()).to.equal(new Date('2016-01-02T00:00:00Z').toISOString())
-  expect(entity.$deletedAt.toISOString()).to.equal(new Date('2016-01-03T00:00:00Z').toISOString())
-  expect(entity.$links).to.deep.equal([])
+  expect(entity.$id.equals(new URIValue('http://example.com/some-id'))).toEqual(true)
+  expect(entity.$context.equals($context)).toEqual(true)
+  expect(entity.$createdAt.toISOString()).toEqual(new Date('2016-01-01T00:00:00Z').toISOString())
+  expect(entity.$updatedAt.toISOString()).toEqual(new Date('2016-01-02T00:00:00Z').toISOString())
+  expect(entity.$deletedAt.toISOString()).toEqual(new Date('2016-01-03T00:00:00Z').toISOString())
+  expect(entity.$links).toEqual([])
 }
 describe('Entity', () => {
   describe('constructor()', () => {
@@ -66,7 +65,7 @@ describe('Entity', () => {
         $context: $context,
         $createdAt: new Date('2016-01-01T00:00:00Z')
       })
-      expect(entity.$modifiedAt.toISOString()).to.equal(new Date('2016-01-01T00:00:00Z').toISOString())
+      expect(entity.$modifiedAt.toISOString()).toEqual(new Date('2016-01-01T00:00:00Z').toISOString())
     })
     it('should return $updatedAt if defined', () => {
       const entity = new Entity({
@@ -74,7 +73,7 @@ describe('Entity', () => {
         $context: $context,
         $updatedAt: new Date('2016-01-02T00:00:00Z')
       })
-      expect(entity.$modifiedAt.toISOString()).to.equal(new Date('2016-01-02T00:00:00Z').toISOString())
+      expect(entity.$modifiedAt.toISOString()).toEqual(new Date('2016-01-02T00:00:00Z').toISOString())
     })
     it('should return $deletedAt if defined', () => {
       const entity = new Entity({
@@ -82,7 +81,7 @@ describe('Entity', () => {
         $context: $context,
         $deletedAt: new Date('2016-01-03T00:00:00Z')
       })
-      expect(entity.$modifiedAt.toISOString()).to.equal(new Date('2016-01-03T00:00:00Z').toISOString())
+      expect(entity.$modifiedAt.toISOString()).toEqual(new Date('2016-01-03T00:00:00Z').toISOString())
     })
   })
 })

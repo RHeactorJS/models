@@ -1,6 +1,5 @@
-/* global describe, it */
+/* global describe expect, it */
 
-import {expect} from 'chai'
 import {Link, Model, Index, IndexType, MaybeIndexType} from '../src'
 import {URIValue} from '@rheactorjs/value-objects'
 
@@ -21,8 +20,8 @@ const links = [
 
 function validateIndex (list) {
   IndexType(list)
-  expect(list.$context.equals(Index.$context)).to.equal(true)
-  expect(list.$links).to.deep.equal(links)
+  expect(list.$context.equals(Index.$context)).toEqual(true)
+  expect(list.$links).toEqual(links)
 }
 describe('Index', () => {
   describe('constructor()', () => {
@@ -36,7 +35,7 @@ describe('Index', () => {
       validateIndex(list2)
     })
     it('should not accept an empty list of links', () => {
-      expect(() => new Index()).to.throw(/expected an array of Link/)
+      expect(() => new Index()).toThrow(/expected an array of Link/)
     })
   })
 
@@ -49,7 +48,7 @@ describe('Index', () => {
 
   describe('$context', () => {
     it('should exist', () => {
-      expect(Index.$context.toString()).to.equal('https://github.com/RHeactorJS/models#Index')
+      expect(Index.$context.toString()).toEqual('https://github.com/RHeactorJS/models#Index')
     })
   })
 })

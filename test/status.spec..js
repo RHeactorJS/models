@@ -1,15 +1,14 @@
-/* global describe, it */
+/* global describe expect, it */
 
 import {Status, StatusType, MaybeStatusType} from '../src'
-import {expect} from 'chai'
 
 const now = new Date()
 function validateStatus (problem) {
   StatusType(problem)
-  expect(problem).to.be.instanceof(Status)
-  expect(problem.status).to.equal('ok')
-  expect(problem.time.getTime()).to.equal(now.getTime())
-  expect(problem.version).to.equal('1.8.0+production.1483709132405')
+  expect(problem).toBeInstanceOf(Status)
+  expect(problem.status).toEqual('ok')
+  expect(problem.time.getTime()).toEqual(now.getTime())
+  expect(problem.version).toEqual('1.8.0+production.1483709132405')
 }
 describe('Status', function () {
   describe('constructor()', () => {
@@ -30,7 +29,7 @@ describe('Status', function () {
 
   describe('$context', () => {
     it('should exist', () => {
-      expect(Status.$context.toString()).to.equal('https://github.com/RHeactorJS/models#Status')
+      expect(Status.$context.toString()).toEqual('https://github.com/RHeactorJS/models#Status')
     })
   })
 

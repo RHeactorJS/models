@@ -1,16 +1,15 @@
-/* global describe, it */
+/* global describe expect, it */
 
-import {expect} from 'chai'
 import {Link, LinkType, MaybeLinkType, MaybeLinkJSONType} from '../src'
 import {URIValue} from '@rheactorjs/value-objects'
 
 function validateLink (link) {
   LinkType(link)
-  expect(link.href.equals(new URIValue('http://example.com/some-item/42'))).to.equal(true)
-  expect(link.subject.equals(new URIValue('http://example.com/jsonld/some'))).to.equal(true)
-  expect(link.list).to.equal(false)
-  expect(link.rel).to.equal(undefined)
-  expect(link.$context.equals(Link.$context)).to.equal(true)
+  expect(link.href.equals(new URIValue('http://example.com/some-item/42'))).toEqual(true)
+  expect(link.subject.equals(new URIValue('http://example.com/jsonld/some'))).toEqual(true)
+  expect(link.list).toEqual(false)
+  expect(link.rel).toEqual(undefined)
+  expect(link.$context.equals(Link.$context)).toEqual(true)
 }
 describe('Link', () => {
   describe('constructor()', () => {
@@ -25,8 +24,8 @@ describe('Link', () => {
         true,
         'next'
       )
-      expect(link.list).to.equal(true)
-      expect(link.rel).to.equal('next')
+      expect(link.list).toEqual(true)
+      expect(link.rel).toEqual('next')
     })
     it('should parse it\'s own values', () => {
       const link = new Link(
@@ -52,7 +51,7 @@ describe('Link', () => {
 
   describe('$context', () => {
     it('should exist', () => {
-      expect(Link.$context.toString()).to.equal('https://github.com/RHeactorJS/models#Link')
+      expect(Link.$context.toString()).toEqual('https://github.com/RHeactorJS/models#Link')
     })
   })
 })

@@ -1,16 +1,15 @@
-/* global describe, it */
+/* global describe expect, it */
 
 import {HttpProblem, HttpProblemType, MaybeHttpProblemType} from '../src'
 import {URIValue} from '@rheactorjs/value-objects'
-import {expect} from 'chai'
 
 function validateProblem (problem) {
   HttpProblemType(problem)
-  expect(problem).to.be.instanceof(HttpProblem)
-  expect(problem.type.equals(new URIValue('http://example.com'))).to.equal(true)
-  expect(problem.title).to.equal('title')
-  expect(problem.status).to.equal(123)
-  expect(problem.detail).to.equal('detail')
+  expect(problem).toBeInstanceOf(HttpProblem)
+  expect(problem.type.equals(new URIValue('http://example.com'))).toEqual(true)
+  expect(problem.title).toEqual('title')
+  expect(problem.status).toEqual(123)
+  expect(problem.detail).toEqual('detail')
 }
 describe('HttpProblem', function () {
   describe('constructor()', () => {
@@ -32,7 +31,7 @@ describe('HttpProblem', function () {
 
   describe('$context', () => {
     it('should exist', () => {
-      expect(HttpProblem.$context.toString()).to.equal('https://www.ietf.org/id/draft-ietf-appsawg-http-problem-01.txt')
+      expect(HttpProblem.$context.toString()).toEqual('https://www.ietf.org/id/draft-ietf-appsawg-http-problem-01.txt')
     })
   })
 

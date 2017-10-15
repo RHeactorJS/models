@@ -1,5 +1,5 @@
-/* global describe, it */
-import {expect} from 'chai'
+/* global describe expect, it */
+
 import {Model, ModelType, MaybeModelType, MaybeModelJSONType} from '../src'
 import {URIValue} from '@rheactorjs/value-objects'
 
@@ -7,8 +7,8 @@ const $context = new URIValue('http://example.com/jsonld/some')
 
 function validateModel (model) {
   ModelType(model)
-  expect(model.$context.equals($context)).to.equal(true)
-  expect(model.$links).to.deep.equal([])
+  expect(model.$context.equals($context)).toEqual(true)
+  expect(model.$links).toEqual([])
 }
 describe('Model', () => {
   describe('constructor()', () => {
@@ -35,11 +35,11 @@ describe('Model', () => {
   describe('$contextVersion', () => {
     it('should default to 1', () => {
       const model = new Model({$context})
-      expect(model.$contextVersion).to.equal(1)
+      expect(model.$contextVersion).toEqual(1)
     })
     it('should use provided $contextVersion', () => {
       const model = new Model({$context, $contextVersion: 2})
-      expect(model.$contextVersion).to.equal(2)
+      expect(model.$contextVersion).toEqual(2)
     })
   })
 })

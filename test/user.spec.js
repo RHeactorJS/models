@@ -1,5 +1,5 @@
-/* global describe, it */
-import {expect} from 'chai'
+/* global describe expect, it */
+
 import {User, UserType, MaybeUserType, MaybeUserJSONType} from '../src'
 import {URIValue, EmailValue} from '@rheactorjs/value-objects'
 
@@ -7,14 +7,14 @@ const $context = new URIValue('https://github.com/RHeactorJS/models#User')
 
 function validateUser (user) {
   UserType(user)
-  expect(user.$id.equals(new URIValue('http://example.com/some-id'))).to.equal(true)
-  expect(user.$version).to.equal(17)
-  expect(user.$deleted).to.equal(false)
-  expect(user.$context.equals($context)).to.equal(true)
-  expect(user.$contextVersion).to.equal(2)
-  expect(user.$createdAt.toISOString()).to.equal(new Date('2016-01-01T00:00:00Z').toISOString())
-  expect(user.$links).to.deep.equal([])
-  expect(user.preferences).to.deep.equal({'foo': 'bar', 'baz': [1, 2, 3]})
+  expect(user.$id.equals(new URIValue('http://example.com/some-id'))).toEqual(true)
+  expect(user.$version).toEqual(17)
+  expect(user.$deleted).toEqual(false)
+  expect(user.$context.equals($context)).toEqual(true)
+  expect(user.$contextVersion).toEqual(2)
+  expect(user.$createdAt.toISOString()).toEqual(new Date('2016-01-01T00:00:00Z').toISOString())
+  expect(user.$links).toEqual([])
+  expect(user.preferences).toEqual({'foo': 'bar', 'baz': [1, 2, 3]})
 }
 describe('User', () => {
   describe('constructor()', () => {
@@ -69,10 +69,10 @@ describe('User', () => {
         preferences: {'foo': 'bar', 'baz': [1, 2, 3]}
       })
       const updated = user.updated({})
-      expect(user.$version).to.equal(17)
-      expect(updated.$version).to.equal(18)
-      expect(updated).to.be.not.equal(user)
-      expect(updated.$updatedAt.getTime()).to.be.above(user.$createdAt.getTime())
+      expect(user.$version).toEqual(17)
+      expect(updated.$version).toEqual(18)
+      expect(updated).not.toEqual(user)
+      expect(updated.$updatedAt.getTime()).toBeGreaterThan(user.$createdAt.getTime())
     })
   })
 
@@ -94,13 +94,13 @@ describe('User', () => {
 
   describe('$context', () => {
     it('should exist', () => {
-      expect(User.$context.toString()).to.equal('https://github.com/RHeactorJS/models#User')
+      expect(User.$context.toString()).toEqual('https://github.com/RHeactorJS/models#User')
     })
   })
 
   describe('$contextVersion', () => {
     it('should exist', () => {
-      expect(User.$contextVersion).to.be.equal(2)
+      expect(User.$contextVersion).toEqual(2)
     })
     it('should be contained in the JSON', () => {
       expect(new User({
@@ -112,7 +112,7 @@ describe('User', () => {
         firstname: 'John',
         lastname: 'Doe',
         preferences: {'foo': 'bar', 'baz': [1, 2, 3]}
-      }).toJSON().$contextVersion).to.equal(2)
+      }).toJSON().$contextVersion).toEqual(2)
     })
   })
 })

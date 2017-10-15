@@ -1,6 +1,5 @@
-/* global describe, it */
+/* global describe expect, it */
 
-import {expect} from 'chai'
 import {ImmutableAggregate, ImmutableAggregateType, MaybeImmutableAggregateType, MaybeImmutableAggregateJSONType} from '../src'
 import {URIValue} from '@rheactorjs/value-objects'
 
@@ -8,12 +7,12 @@ const $context = new URIValue('http://example.com/jsonld/some')
 
 function validateImmutableAggregate (aggregate) {
   ImmutableAggregateType(aggregate)
-  expect(aggregate.$id.equals(new URIValue('http://example.com/some-id'))).to.equal(true)
-  expect(aggregate.$version).to.equal(17)
-  expect(aggregate.$deleted).to.equal(false)
-  expect(aggregate.$context.equals($context)).to.equal(true)
-  expect(aggregate.$createdAt.toISOString()).to.equal(new Date('2016-01-01T00:00:00Z').toISOString())
-  expect(aggregate.$links).to.deep.equal([])
+  expect(aggregate.$id.equals(new URIValue('http://example.com/some-id'))).toEqual(true)
+  expect(aggregate.$version).toEqual(17)
+  expect(aggregate.$deleted).toEqual(false)
+  expect(aggregate.$context.equals($context)).toEqual(true)
+  expect(aggregate.$createdAt.toISOString()).toEqual(new Date('2016-01-01T00:00:00Z').toISOString())
+  expect(aggregate.$links).toEqual([])
 }
 describe('ImmutableAggregate', () => {
   describe('constructor()', () => {
@@ -52,10 +51,10 @@ describe('ImmutableAggregate', () => {
         $createdAt: new Date('2016-01-01T00:00:00Z')
       })
       const updated = aggregate.updated({foo: 'bar'})
-      expect(aggregate.$version).to.equal(17)
-      expect(updated.$version).to.equal(18)
-      expect(updated).to.be.not.equal(aggregate)
-      expect(updated.$updatedAt.getTime()).to.be.above(aggregate.$createdAt.getTime())
+      expect(aggregate.$version).toEqual(17)
+      expect(updated.$version).toEqual(18)
+      expect(updated).not.toEqual(aggregate)
+      expect(updated.$updatedAt.getTime()).toBeGreaterThan(aggregate.$createdAt.getTime())
     })
 
     it('should apply props', () => {
@@ -84,10 +83,10 @@ describe('ImmutableAggregate', () => {
       }
       const s = new Some({foo: 'bar', $version: 1, $createdAt: new Date(), $id: new URIValue('http://example.com/some-id')})
       const u = s.updated({foo: 'baz'})
-      expect(s).to.not.equal(u)
-      expect(u.$version).to.equal(2)
-      expect(s.foo).to.equal('bar')
-      expect(u.foo).to.equal('baz')
+      expect(s).not.toEqual(u)
+      expect(u.$version).toEqual(2)
+      expect(s.foo).toEqual('bar')
+      expect(u.foo).toEqual('baz')
     })
   })
 
@@ -100,11 +99,11 @@ describe('ImmutableAggregate', () => {
         $createdAt: new Date('2016-01-01T00:00:00Z')
       })
       const deleted = aggregate.deleted()
-      expect(aggregate.$version).to.equal(17)
-      expect(deleted.$deleted).to.equal(true)
-      expect(deleted.$version).to.equal(18)
-      expect(deleted).to.be.not.equal(aggregate)
-      expect(deleted.$deletedAt.getTime()).to.be.above(aggregate.$createdAt.getTime())
+      expect(aggregate.$version).toEqual(17)
+      expect(deleted.$deleted).toEqual(true)
+      expect(deleted.$version).toEqual(18)
+      expect(deleted).not.toEqual(aggregate)
+      expect(deleted.$deletedAt.getTime()).toBeGreaterThan(aggregate.$createdAt.getTime())
     })
   })
 

@@ -1,14 +1,13 @@
-/* global describe, it */
+/* global describe expect, it */
 
-import {expect} from 'chai'
 import {Reference, ReferenceType, MaybeReferenceType, MaybeReferenceJSONType, Entity, ImmutableAggregate} from '../src'
 import {URIValue} from '@rheactorjs/value-objects'
 
 function validateReference (reference) {
   ReferenceType(reference)
-  expect(reference.$id.equals(new URIValue('http://example.com/some-item/42'))).to.equal(true)
-  expect(reference.subject.equals(new URIValue('http://example.com/jsonld/some'))).to.equal(true)
-  expect(reference.$context.equals(Reference.$context)).to.equal(true)
+  expect(reference.$id.equals(new URIValue('http://example.com/some-item/42'))).toEqual(true)
+  expect(reference.subject.equals(new URIValue('http://example.com/jsonld/some'))).toEqual(true)
+  expect(reference.$context.equals(Reference.$context)).toEqual(true)
 }
 describe('Reference', () => {
   describe('constructor()', () => {
@@ -38,7 +37,7 @@ describe('Reference', () => {
 
   describe('$context', () => {
     it('should exist', () => {
-      expect(Reference.$context.toString()).to.equal('https://github.com/RHeactorJS/models#Reference')
+      expect(Reference.$context.toString()).toEqual('https://github.com/RHeactorJS/models#Reference')
     })
   })
 

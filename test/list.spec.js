@@ -1,8 +1,7 @@
-/* global describe, it */
+/* global describe expect test it */
 
-import {expect} from 'chai'
-import {Link, Model, List, ListType, MaybeListType, MaybeListJSONType} from '../src'
-import {URIValue} from '@rheactorjs/value-objects'
+import { Link, Model, List, ListType, MaybeListType, MaybeListJSONType } from '../src'
+import { URIValue } from '@rheactorjs/value-objects'
 
 const items = [new Model({
   $context: new URIValue('http://example.com/jsonld/some'),
@@ -28,14 +27,15 @@ const link = new Link(
 
 function validateList (list) {
   ListType(list)
-  expect(list.$context.equals(List.$context)).to.equal(true)
-  expect(list.itemsPerPage).to.equal(10)
-  expect(list.total).to.equal(1)
-  expect(list.hasNext).to.equal(true)
-  expect(list.hasPrev).to.equal(false)
-  expect(list.$links).to.deep.equal([link])
-  expect(list.offset).to.equal(50)
+  expect(list.$context.equals(List.$context)).toEqual(true)
+  expect(list.itemsPerPage).toEqual(10)
+  expect(list.total).toEqual(1)
+  expect(list.hasNext).toEqual(true)
+  expect(list.hasPrev).toEqual(false)
+  expect(list.$links).toEqual([link])
+  expect(list.offset).toEqual(50)
 }
+
 describe('List', () => {
   describe('constructor()', () => {
     it('should accept values', () => {
@@ -56,7 +56,7 @@ describe('List', () => {
   })
 
   describe('from / to', () => {
-    it('should have the correct values on lists with offset', () => {
+    describe('should have the correct values on lists with offset', () => {
       [
         [new List(items, 1, 10, [link], 0), 1, 1],
         [new List(items, 9, 10, [link], 0), 1, 9],
@@ -69,19 +69,27 @@ describe('List', () => {
         const list = data[0]
         const from = data[1]
         const to = data[2]
-        expect(list.from, `list.from should equal ${from}`).to.equal(from)
-        expect(list.to, `list.from should equal ${to}`).to.equal(to)
+        test(`list.from should equal ${from}`, () => {
+          expect(list.from).toEqual(from)
+        })
+        test(`list.from should equal ${to}`, () => {
+          expect(list.to).toEqual(to)
+        })
       })
     })
     it('should be undefined on lists without offset', () => {
       const list = new List(items, 1, 10, [link])
-      expect(list.from).to.equal(undefined)
-      expect(list.to).to.equal(undefined)
+      expect(list.from).toEqual(undefined)
+      expect(list.to).toEqual(undefined)
     })
-    it('should be zero if result is empty', () => {
+    describe('should be zero if result is empty', () => {
       const l = new List(items, 0, 10, [link], 0)
-      expect(l.from, 'from should be zero on an empty list').to.equal(0)
-      expect(l.to, 'to should be zero on an empty list').to.equal(0)
+      test('from should be zero on an empty list', () => {
+        expect(l.from).toEqual(0)
+      })
+      test('to should be zero on an empty list', () => {
+        expect(l.to).toEqual(0)
+      })
     })
   })
 
@@ -91,27 +99,31 @@ describe('List', () => {
       validateList(list)
     })
 
-    it('should always return empty item and link arrays', () => {
+    describe('should always return empty item and link arrays', () => {
       let jsondata = JSON.parse(JSON.stringify(new List([], 0, 10)))
-      expect(jsondata.items, 'if empty items given, it should be empty in JSON').to.be.instanceof(Array)
-      expect(jsondata.$links, 'if empty $links given, it should be empty in JSON').to.be.instanceof(Array)
+      test('if empty items given, it should be empty in JSON', () => {
+        expect(jsondata.items).toBeInstanceOf(Array)
+      })
+      test('if empty $links given, it should be empty in JSON', () => {
+        expect(jsondata.$links).toBeInstanceOf(Array)
+      })
     })
 
     it('should allow for empty offset', () => {
       const list = List.fromJSON(JSON.parse(JSON.stringify(new List(items, 1, 10, [link]))), Model.fromJSON)
-      expect(list.$context.equals(List.$context)).to.equal(true)
-      expect(list.itemsPerPage).to.equal(10)
-      expect(list.total).to.equal(1)
-      expect(list.hasNext).to.equal(true)
-      expect(list.hasPrev).to.equal(false)
-      expect(list.$links).to.deep.equal([link])
-      expect(list.offset).to.equal(undefined)
+      expect(list.$context.equals(List.$context)).toEqual(true)
+      expect(list.itemsPerPage).toEqual(10)
+      expect(list.total).toEqual(1)
+      expect(list.hasNext).toEqual(true)
+      expect(list.hasPrev).toEqual(false)
+      expect(list.$links).toEqual([link])
+      expect(list.offset).toEqual(undefined)
     })
   })
 
   describe('$context', () => {
     it('should exist', () => {
-      expect(List.$context.toString()).to.equal('https://github.com/RHeactorJS/models#List')
+      expect(List.$context.toString()).toEqual('https://github.com/RHeactorJS/models#List')
     })
   })
 })
