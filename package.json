@@ -26,24 +26,24 @@
   },
   "homepage": "https://github.com/RHeactorJS/models#readme",
   "dependencies": {
-    "@rheactorjs/errors": "1.x",
-    "@rheactorjs/value-objects": "1.x",
-    "tcomb": "^3.2.16"
+    "@rheactorjs/errors": "^1.0.1",
+    "@rheactorjs/value-objects": "^1.0.4",
+    "tcomb": "^3.2.24"
   },
   "devDependencies": {
-    "@commitlint/cli": "^4.2.0",
-    "@commitlint/config-angular": "^4.2.0",
-    "babel-cli": "^6.23.0",
+    "@commitlint/cli": "^5.2.0",
+    "@commitlint/config-angular": "^5.1.1",
+    "babel-cli": "^6.26.0",
     "babel-plugin-transform-object-assign": "^6.22.0",
-    "babel-preset-env": "^1.2.1",
+    "babel-preset-env": "^1.6.1",
     "babel-preset-es2015": "^6.22.0",
-    "babel-register": "^6.23.0",
+    "babel-register": "^6.26.0",
     "codeclimate-test-reporter": "^0.5.0",
     "husky": "^0.14.3",
     "jest": "^21.2.1",
-    "jsonwebtoken": "^8.0.0",
-    "semantic-release": "^8.0.0",
-    "standard": "^10.0.2"
+    "jsonwebtoken": "^8.1.0",
+    "semantic-release": "^8.2.0",
+    "standard": "^10.0.3"
   },
   "files": [
     "dist",
