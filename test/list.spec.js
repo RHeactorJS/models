@@ -65,7 +65,7 @@ describe('List', () => {
         [new List(items, 19, 10, [link], 10), 11, 19],
         [new List(items, 20, 10, [link], 10), 11, 20],
         [new List(items, 21, 10, [link], 10), 11, 20]
-      ].map(data => {
+      ].forEach(data => {
         const list = data[0]
         const from = data[1]
         const to = data[2]

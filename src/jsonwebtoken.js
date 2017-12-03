@@ -34,7 +34,7 @@ export class JsonWebToken extends Model {
     this.jti = undefined // JWT ID
     const self = this
     const props = ['iss', 'sub', 'aud', 'exp', 'nbf', 'iat', 'jti']
-    props.map(k => {
+    props.forEach(k => {
       self[k] = data[k] || undefined
       delete data[k]
     })
