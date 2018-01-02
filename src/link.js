@@ -1,6 +1,6 @@
-import {Boolean as BooleanType, maybe, refinement, irreducible, String as StringType, struct, list} from 'tcomb'
+import {Boolean as BooleanType, maybe, refinement, irreducible, struct, list} from 'tcomb'
 import {URIValue, URIValueType} from '@rheactorjs/value-objects'
-import {MaybeStringType, MaybeVersionNumberType} from './types'
+import { MaybeStringType, MaybeVersionNumberType, NonEmptyStringType } from './types'
 
 const $context = new URIValue('https://github.com/RHeactorJS/models#Link')
 const $contextVersion = 1
@@ -66,12 +66,12 @@ export const MaybeLinkType = maybe(LinkType)
 export const LinkListType = list(LinkType)
 export const MaybeLinkListType = maybe(LinkListType)
 export const LinkJSONType = struct({
-  $context: refinement(StringType, s => s === Link.$context.toString(), 'LinkContext'),
+  $context: refinement(NonEmptyStringType, s => s === Link.$context.toString(), 'LinkContext'),
   $contextVersion: MaybeVersionNumberType,
-  subject: StringType,
-  href: StringType,
+  subject: NonEmptyStringType,
+  href: NonEmptyStringType,
   list: maybe(BooleanType),
-  rel: maybe(StringType)
+  rel: MaybeStringType
 }, 'LinkJSONType')
 export const MaybeLinkJSONType = maybe(LinkJSONType)
 export const LinkListJSONType = list(LinkJSONType)

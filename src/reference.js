@@ -1,7 +1,7 @@
 import {URIValue, URIValueType} from '@rheactorjs/value-objects'
-import {MaybeVersionNumberType} from './types'
+import { MaybeVersionNumberType, NonEmptyStringType } from './types'
 import {EntityType} from './entity'
-import {maybe, refinement, irreducible, String as StringType, struct} from 'tcomb'
+import {maybe, refinement, irreducible, struct} from 'tcomb'
 
 const $context = new URIValue('https://github.com/RHeactorJS/models#Reference')
 const $contextVersion = 1
@@ -67,9 +67,9 @@ export class Reference {
 export const ReferenceType = irreducible('ReferenceType', x => x.constructor.name === Reference.name && '$context' in x && x.$context.toString() === $context.toString() && '$contextVersion' in x && x.$contextVersion === $contextVersion)
 export const MaybeReferenceType = maybe(ReferenceType)
 export const ReferenceJSONType = struct({
-  $context: refinement(StringType, s => s === Reference.$context.toString(), 'ReferenceContext'),
+  $context: refinement(NonEmptyStringType, s => s === Reference.$context.toString(), 'ReferenceContext'),
   $contextVersion: MaybeVersionNumberType,
-  subject: StringType,
-  $id: StringType
+  subject: NonEmptyStringType,
+  $id: NonEmptyStringType
 }, 'ReferenceJSONType')
 export const MaybeReferenceJSONType = maybe(ReferenceJSONType)

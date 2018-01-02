@@ -1,7 +1,7 @@
-import {list, maybe, refinement, irreducible, String as StringType, struct} from 'tcomb'
+import {list, maybe, refinement, irreducible, struct} from 'tcomb'
 import {URIValue} from '@rheactorjs/value-objects'
 import {Link, LinkType, LinkListJSONType} from './link'
-import {MaybeVersionNumberType} from './types'
+import { MaybeVersionNumberType, NonEmptyStringType } from './types'
 
 const $context = new URIValue('https://github.com/RHeactorJS/models#Index')
 const $contextVersion = 1
@@ -55,7 +55,7 @@ export const LinkIndexType = list(LinkType)
 export const IndexType = irreducible('IndexType', x => x.constructor.name === Index.name && '$context' in x && x.$context.toString() === $context.toString() && '$contextVersion' in x && x.$contextVersion === $contextVersion)
 export const MaybeIndexType = maybe(IndexType)
 export const IndexJSONType = struct({
-  $context: refinement(StringType, s => s === Index.$context.toString(), 'IndexContext'),
+  $context: refinement(NonEmptyStringType, s => s === Index.$context.toString(), 'IndexContext'),
   $contextVersion: MaybeVersionNumberType,
   $links: LinkListJSONType
 }, 'IndexJSONType')

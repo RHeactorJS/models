@@ -1,9 +1,9 @@
 import {ImmutableAggregate} from './immutable-aggregate'
-import {MaybeStringType, VersionNumberType, MaybeVersionNumberType, MaybeBooleanType} from './types'
+import { MaybeStringType, VersionNumberType, MaybeVersionNumberType, MaybeBooleanType, NonEmptyStringType } from './types'
 import {MaybeLinkListJSONType} from './link'
 import {EmailValue, EmailValueType, URIValue, MaybeURIValueType} from '@rheactorjs/value-objects'
-import {String as StringType, Any as AnyType, Boolean as BooleanType, dict, maybe, refinement, irreducible, struct} from 'tcomb'
-const PreferencesType = dict(StringType, AnyType)
+import {Any as AnyType, Boolean as BooleanType, dict, maybe, refinement, irreducible, struct} from 'tcomb'
+const PreferencesType = dict(NonEmptyStringType, AnyType)
 
 const $context = new URIValue('https://github.com/RHeactorJS/models#User')
 const $contextVersion = 2
@@ -16,8 +16,8 @@ export class User extends ImmutableAggregate {
     super(Object.assign(fields, {$context, $contextVersion}))
 
     this.email = EmailValueType(fields.email, ['User', 'email:EmailValue'])
-    this.firstname = StringType(fields.firstname, ['User', 'firstname:String'])
-    this.lastname = StringType(fields.lastname, ['User', 'lastname:String'])
+    this.firstname = NonEmptyStringType(fields.firstname, ['User', 'firstname:String'])
+    this.lastname = NonEmptyStringType(fields.lastname, ['User', 'lastname:String'])
     this.avatar = MaybeURIValueType(fields.avatar, ['User', 'avatar:?URIValue'])
     this.superUser = BooleanType(fields.superUser || false, ['User', 'superUser:Boolean'])
     this.active = BooleanType(fields.active || false, ['User', 'active:Boolean'])
@@ -81,20 +81,20 @@ export class User extends ImmutableAggregate {
 export const UserType = irreducible('UserType', x => x.constructor.name === User.name && '$context' in x && x.$context.toString() === $context.toString() && '$contextVersion' in x && x.$contextVersion === $contextVersion)
 export const MaybeUserType = maybe(UserType)
 export const UserJSONType = struct({
-  $context: refinement(StringType, s => s === User.$context.toString(), 'UserContext'),
+  $context: refinement(NonEmptyStringType, s => s === User.$context.toString(), 'UserContext'),
   $contextVersion: MaybeVersionNumberType,
-  $id: StringType,
+  $id: NonEmptyStringType,
   $version: VersionNumberType,
-  $createdAt: StringType,
+  $createdAt: NonEmptyStringType,
   $updatedAt: MaybeStringType,
   $deletedAt: MaybeStringType,
-  email: StringType,
-  firstname: StringType,
-  lastname: StringType,
+  email: NonEmptyStringType,
+  firstname: NonEmptyStringType,
+  lastname: NonEmptyStringType,
   avatar: MaybeStringType,
   superUser: MaybeBooleanType,
   active: MaybeBooleanType,
-  preferences: StringType,
+  preferences: NonEmptyStringType,
   $links: MaybeLinkListJSONType
 }, 'UserJSONType')
 export const MaybeUserJSONType = maybe(UserJSONType)

@@ -1,6 +1,6 @@
 import {URIValue, URIValueType} from '@rheactorjs/value-objects'
-import {MaybeStringType, MaybeVersionNumberType} from './types'
-import {maybe, refinement, Integer as IntegerType, irreducible, String as StringType, struct} from 'tcomb'
+import { MaybeStringType, MaybeVersionNumberType, NonEmptyStringType } from './types'
+import {maybe, refinement, Integer as IntegerType, irreducible, struct} from 'tcomb'
 
 const $context = new URIValue('https://www.ietf.org/id/draft-ietf-appsawg-http-problem-01.txt')
 const $contextVersion = 1
@@ -78,9 +78,9 @@ export const HttpStatusCodeType = refinement(IntegerType, n => n >= 100 && n < 6
 export const HttpProblemType = irreducible('HttpProblemType', x => '$context' in x && x.$context.toString() === $context.toString() && '$contextVersion' in x && x.$contextVersion === $contextVersion)
 export const MaybeHttpProblemType = maybe(HttpProblemType)
 export const HttpProblemJSONType = struct({
-  $context: refinement(StringType, s => s === HttpProblem.$context.toString(), 'HttpProblemContext'),
+  $context: refinement(NonEmptyStringType, s => s === HttpProblem.$context.toString(), 'HttpProblemContext'),
   $contextVersion: MaybeVersionNumberType,
-  type: StringType,
+  type: NonEmptyStringType,
   title: MaybeStringType,
   status: HttpStatusCodeType,
   detail: MaybeStringType

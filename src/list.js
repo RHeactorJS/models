@@ -1,8 +1,8 @@
-import {Function as FunctionType, maybe, refinement, Integer as IntegerType, irreducible, String as StringType, struct, list} from 'tcomb'
+import {Function as FunctionType, maybe, refinement, Integer as IntegerType, irreducible, struct, list} from 'tcomb'
 import {URIValue} from '@rheactorjs/value-objects'
 import {Link, LinkListType, LinkJSONType} from './link'
 import {ModelListType} from './model'
-import {MaybeVersionNumberType} from './types'
+import { MaybeVersionNumberType, NonEmptyStringType } from './types'
 
 const $context = new URIValue('https://github.com/RHeactorJS/models#List')
 const $contextVersion = 1
@@ -101,7 +101,7 @@ export const MaybeZeroOrPositiveIntegerType = maybe(ZeroOrPositiveIntegerType)
 export const ListType = irreducible('ListType', x => x.constructor.name === List.name && '$context' in x && x.$context.toString() === $context.toString() && '$contextVersion' in x && x.$contextVersion === $contextVersion)
 export const MaybeListType = maybe(ListType)
 export const ListJSONType = struct({
-  $context: refinement(StringType, s => s === List.$context.toString(), 'ListContext'),
+  $context: refinement(NonEmptyStringType, s => s === List.$context.toString(), 'ListContext'),
   $contextVersion: MaybeVersionNumberType,
   $links: list(LinkJSONType),
   total: ZeroOrPositiveIntegerType,

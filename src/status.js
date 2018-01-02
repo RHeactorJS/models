@@ -1,7 +1,7 @@
-import {String as StringType, Date as DateType, maybe, refinement, irreducible, struct} from 'tcomb'
+import {Date as DateType, maybe, refinement, irreducible, struct} from 'tcomb'
 import {URIValue} from '@rheactorjs/value-objects'
 import {Model} from './model'
-import {MaybeVersionNumberType} from './types'
+import { MaybeVersionNumberType, NonEmptyStringType } from './types'
 
 const $context = new URIValue('https://github.com/RHeactorJS/models#Status')
 const $contextVersion = 1
@@ -14,9 +14,9 @@ export class Status extends Model {
    */
   constructor (status, time, version) {
     super({$context, $contextVersion})
-    this.status = StringType(status)
+    this.status = NonEmptyStringType(status)
     this.time = DateType(time)
-    this.version = StringType(version)
+    this.version = NonEmptyStringType(version)
   }
 
   /**
@@ -61,9 +61,9 @@ export class Status extends Model {
 export const StatusType = irreducible('StatusType', x => x.constructor.name === Status.name && '$context' in x && x.$context.toString() === $context.toString() && '$contextVersion' in x && x.$contextVersion === $contextVersion)
 export const MaybeStatusType = maybe(StatusType)
 export const StatusJSONType = struct({
-  $context: refinement(StringType, s => s === Status.$context.toString(), 'StatusContext'),
+  $context: refinement(NonEmptyStringType, s => s === Status.$context.toString(), 'StatusContext'),
   $contextVersion: MaybeVersionNumberType,
-  status: StringType,
-  time: StringType,
-  version: StringType
+  status: NonEmptyStringType,
+  time: NonEmptyStringType,
+  version: NonEmptyStringType
 }, 'StatusJSONType')
