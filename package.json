@@ -4,6 +4,7 @@
   "version": "0.0.0-development",
   "main": "dist/index.js",
   "scripts": {
+    "pretest": "make dist",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:coverage-travis": "npm run test:coverage && codeclimate-test-reporter < ./coverage/lcov.info && rm -rf ./coverage",
