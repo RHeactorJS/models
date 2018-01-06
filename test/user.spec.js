@@ -25,8 +25,7 @@ describe('User', () => {
         $context: $context,
         $createdAt: new Date('2016-01-01T00:00:00Z'),
         email: new EmailValue('john@example.com'),
-        firstname: 'John',
-        lastname: 'Doe',
+        name: 'John Doe',
         preferences: {'foo': 'bar', 'baz': [1, 2, 3]}
       })
       validateUser(user)
@@ -38,8 +37,7 @@ describe('User', () => {
         $context: $context,
         $createdAt: new Date('2016-01-01T00:00:00Z'),
         email: new EmailValue('john@example.com'),
-        firstname: 'John',
-        lastname: 'Doe',
+        name: 'John Doe',
         preferences: {'foo': 'bar', 'baz': [1, 2, 3]}
       })
       const user2 = new User({
@@ -48,8 +46,7 @@ describe('User', () => {
         $context: user.$context,
         $createdAt: user.$createdAt,
         email: user.email,
-        firstname: user.firstname,
-        lastname: user.lastname,
+        name: user.name,
         preferences: {'foo': 'bar', 'baz': [1, 2, 3]}
       })
       validateUser(user2)
@@ -64,8 +61,7 @@ describe('User', () => {
         $context: $context,
         $createdAt: new Date('2016-01-01T00:00:00Z'),
         email: new EmailValue('john@example.com'),
-        firstname: 'John',
-        lastname: 'Doe',
+        name: 'John Doe',
         preferences: {'foo': 'bar', 'baz': [1, 2, 3]}
       })
       const updated = user.updated({})
@@ -84,8 +80,7 @@ describe('User', () => {
         $context: $context,
         $createdAt: new Date('2016-01-01T00:00:00Z'),
         email: new EmailValue('john@example.com'),
-        firstname: 'John',
-        lastname: 'Doe',
+        name: 'John Doe',
         preferences: {'foo': 'bar', 'baz': [1, 2, 3]}
       }))))
       validateUser(user)
@@ -109,8 +104,7 @@ describe('User', () => {
         $context: $context,
         $createdAt: new Date('2016-01-01T00:00:00Z'),
         email: new EmailValue('john@example.com'),
-        firstname: 'John',
-        lastname: 'Doe',
+        name: 'John Doe',
         preferences: {'foo': 'bar', 'baz': [1, 2, 3]}
       }).toJSON().$contextVersion).toEqual(2)
     })
@@ -128,8 +122,7 @@ describe('MaybeUserType', () => {
       $context: $context,
       $createdAt: new Date('2016-01-01T00:00:00Z'),
       email: new EmailValue('john@example.com'),
-      firstname: 'John',
-      lastname: 'Doe',
+      name: 'John Doe',
       preferences: {'foo': 'bar', 'baz': [1, 2, 3]}
     }))
   })
@@ -146,8 +139,7 @@ describe('MaybeUserJSONType', () => {
       $context: $context,
       $createdAt: new Date('2016-01-01T00:00:00Z'),
       email: new EmailValue('john@example.com'),
-      firstname: 'John',
-      lastname: 'Doe',
+      name: 'John Doe',
       preferences: {'foo': 'bar', 'baz': [1, 2, 3]}
     }).toJSON())
   })

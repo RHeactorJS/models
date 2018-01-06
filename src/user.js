@@ -10,32 +10,28 @@ const $contextVersion = 2
 
 export class User extends ImmutableAggregate {
   /**
-   * @param {{$id: URIValue, $version: Number, $createdAt: Date|undefined, $updatedAt: Date|undefined, $deletedAt: Date|undefined, email: EmailValue, firstname: String|undefined, lastname: String|undefined, avatar: URIValue|undefined, superUser: Boolean|undefined, active: Boolean|undefined, preferences: Object|undefined}} fields
+   * @param {{$id: URIValue, $version: Number, $createdAt: Date|undefined, $updatedAt: Date|undefined, $deletedAt: Date|undefined, email: EmailValue, name: String|undefined, avatar: URIValue|undefined, superUser: Boolean|undefined, active: Boolean|undefined, preferences: Object|undefined}} fields
    */
   constructor (fields) {
     super(Object.assign(fields, {$context, $contextVersion}))
 
     this.email = EmailValueType(fields.email, ['User', 'email:EmailValue'])
-    this.firstname = NonEmptyStringType(fields.firstname, ['User', 'firstname:String'])
-    this.lastname = NonEmptyStringType(fields.lastname, ['User', 'lastname:String'])
+    this.name = NonEmptyStringType(fields.name, ['User', 'name:String'])
     this.avatar = MaybeURIValueType(fields.avatar, ['User', 'avatar:?URIValue'])
     this.superUser = BooleanType(fields.superUser || false, ['User', 'superUser:Boolean'])
     this.active = BooleanType(fields.active || false, ['User', 'active:Boolean'])
     this.preferences = PreferencesType(fields.preferences || {}, ['User', 'preferences:Map(String: Any)'])
-
-    this.name = [this.firstname, this.lastname].join(' ')
   }
 
   /**
-   * @returns {{$id: String, $version: Number, $context: String, $contextVersion: Number, $links: Array<Link>, $createdAt: String|undefined, $updatedAt: String|undefined, $deletedAt: String|undefined, email: String, firstname: String|undefined, lastname: String|undefined, avatar: String|undefined, superUser: Boolean|undefined, active: Boolean|undefined, preferences: String}}
+   * @returns {{$id: String, $version: Number, $context: String, $contextVersion: Number, $links: Array<Link>, $createdAt: String|undefined, $updatedAt: String|undefined, $deletedAt: String|undefined, email: String, name: String|undefined, avatar: String|undefined, superUser: Boolean|undefined, active: Boolean|undefined, preferences: String}}
    */
   toJSON () {
     return Object.assign(
       super.toJSON(),
       {
         email: this.email.toString(),
-        firstname: this.firstname,
-        lastname: this.lastname,
+        name: this.name,
         avatar: this.avatar ? this.avatar.toString() : undefined,
         superUser: this.superUser,
         active: this.active,
@@ -45,7 +41,7 @@ export class User extends ImmutableAggregate {
   }
 
   /**
-   * @param {{$id: String, $context: String, $links: Array<Link>, $createdAt: String|undefined, $updatedAt: String|undefined, $deletedAt: String|undefined, email: String, firstname: String|undefined, lastname: String|undefined, avatar: String|undefined, superUser: Boolean|undefined, active: Boolean|undefined, preferences: String}} data
+   * @param {{$id: String, $context: String, $links: Array<Link>, $createdAt: String|undefined, $updatedAt: String|undefined, $deletedAt: String|undefined, email: String, name: String|undefined, avatar: String|undefined, superUser: Boolean|undefined, active: Boolean|undefined, preferences: String}} data
    * @returns {Entity}
    */
   static fromJSON (data) {
@@ -53,8 +49,7 @@ export class User extends ImmutableAggregate {
     return new User(Object.assign(
       super.fromJSON(data), {
         email: new EmailValue(data.email),
-        firstname: data.firstname,
-        lastname: data.lastname,
+        name: data.name,
         avatar: data.avatar ? new URIValue(data.avatar) : undefined,
         superUser: data.superUser,
         active: data.active,
@@ -89,8 +84,7 @@ export const UserJSONType = struct({
   $updatedAt: MaybeStringType,
   $deletedAt: MaybeStringType,
   email: NonEmptyStringType,
-  firstname: NonEmptyStringType,
-  lastname: NonEmptyStringType,
+  name: NonEmptyStringType,
   avatar: MaybeStringType,
   superUser: MaybeBooleanType,
   active: MaybeBooleanType,
