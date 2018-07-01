@@ -21,35 +21,35 @@ describe('jsonld', function () {
     jsonld.addLink(ContributionContext, new Link(new URIValue('http://example.com/api/netwoRHk/:networhk_id/search/commitment?contribution=:id'), CommitmentContext, true))
   })
 
-  describe('.createId()', () => {
+  describe('.createIdLink()', () => {
     it('should create an $id link', () => {
-      expect(jsonld.createId(UserContext, '42').equals(new URIValue('http://example.com/api/user/42'))).toEqual(true)
-      expect(jsonld.createId(UserContext, '17').equals(new URIValue('http://example.com/api/user/17'))).toEqual(true)
+      expect(jsonld.createIdLink(UserContext, '42').equals(new URIValue('http://example.com/api/user/42'))).toEqual(true)
+      expect(jsonld.createIdLink(UserContext, '17').equals(new URIValue('http://example.com/api/user/17'))).toEqual(true)
     })
     it('should accept multiple ids', () => {
       const expected = 'http://example.com/api/user/42/task/17'
-      const actual = jsonld.createId(UserTaskContext, {'id': '42', 'task_id': '17'}).toString()
+      const actual = jsonld.createIdLink(UserTaskContext, {'id': '42', 'task_id': '17'}).toString()
       expect(actual).toEqual(expected)
     })
   })
 
-  describe('.parseId()', () => {
-    it('should parse an $id link', () => {
-      expect(jsonld.parseId(UserContext, new URIValue('http://example.com/api/user/42'))).toEqual('42')
-      expect(jsonld.parseId(UserContext, new URIValue('http://example.com/api/user/17'))).toEqual('17')
+  describe('.parseIdLink()', () => {
+    it('should parseIdLink an $id link', () => {
+      expect(jsonld.parseIdLink(UserContext, new URIValue('http://example.com/api/user/42'))).toEqual('42')
+      expect(jsonld.parseIdLink(UserContext, new URIValue('http://example.com/api/user/17'))).toEqual('17')
     })
   })
 
-  describe('.parseIds()', () => {
-    it('should parse an $id link with multiple ids', () => {
-      expect(jsonld.parseIds(UserTaskContext, new URIValue('http://example.com/api/user/42/task/17'))).toEqual({
+  describe('.parseMultiIdLink()', () => {
+    it('should parseIdLink an $id link with multiple ids', () => {
+      expect(jsonld.parseMultiIdLink(UserTaskContext, new URIValue('http://example.com/api/user/42/task/17'))).toEqual({
         'id': '42',
         'task_id': '17'
       })
     })
     it('should throw an error if $id does not match the pattern', () => {
       try {
-        jsonld.parseIds(UserTaskContext, new URIValue('http://foo.com/'))
+        jsonld.parseMultiIdLink(UserTaskContext, new URIValue('http://foo.com/'))
       } catch (err) {
         expect(err instanceof ValidationFailedError).toEqual(true)
       }

@@ -47,12 +47,12 @@ export class JSONLD {
    * @param {object} idMap
    * @returns {URIValue}
    */
-  createId ($context, idMap) {
+  createIdLink ($context, idMap) {
     if (typeof idMap !== 'object') {
       idMap = {id: idMap}
     }
-    URIValueType($context, ['JSONLD', 'createId()', '$context:URIValue'])
-    IdMapType(idMap, ['JSONLD', 'createId()', 'idMap:Map<String: AggregateId>'])
+    URIValueType($context, ['JSONLD', 'createIdLink()', '$context:URIValue'])
+    IdMapType(idMap, ['JSONLD', 'createIdLink()', 'idMap:Map<String: AggregateId>'])
     let href = this.typeMap[$context.toString()]
     for (const k in idMap) {
       href = href.replace(':' + k, idMap[k])
@@ -65,10 +65,10 @@ export class JSONLD {
    * @param {URIValue} $id
    * @return String
    */
-  parseId ($context, $id) {
-    URIValueType($context, ['JSONLD', 'parseId()', '$context:URIValue'])
-    URIValueType($id, ['JSONLD', 'parseId()', '$id:URIValue'])
-    return this.parseIds($context, $id).id
+  parseIdLink ($context, $id) {
+    URIValueType($context, ['JSONLD', 'parseIdLink()', '$context:URIValue'])
+    URIValueType($id, ['JSONLD', 'parseIdLink()', '$id:URIValue'])
+    return this.parseMultiIdLink($context, $id).id
   }
 
   /**
@@ -78,9 +78,9 @@ export class JSONLD {
    * @return {Object}
    * @throws ValidationFailedError if $id cannot be matched
    */
-  parseIds ($context, $id) {
-    URIValueType($context, ['JSONLD', 'parseIds()', '$context:URIValue'])
-    URIValueType($id, ['JSONLD', 'parseIds()', '$id:URIValue'])
+  parseMultiIdLink ($context, $id) {
+    URIValueType($context, ['JSONLD', 'parseMultiIdLink()', '$context:URIValue'])
+    URIValueType($id, ['JSONLD', 'parseMultiIdLink()', '$id:URIValue'])
     const template = this.typeMap[$context.toString()]
     const placeholders = template.match(/:[a-z_]+/g)
     const matches = $id.toString().match(new RegExp(template.replace(/:[a-z_]+/g, '([0-9]+)')))
