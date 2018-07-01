@@ -1,13 +1,13 @@
 /* global describe expect, it */
 
-import {ImmutableAggregate, ImmutableAggregateType, MaybeImmutableAggregateType, MaybeImmutableAggregateJSONType} from '../src'
+import {ImmutableAggregate, ImmutableAggregateType, MaybeImmutableAggregateType, MaybeImmutableAggregateJSONType, ID} from '../src'
 import {URIValue} from '@rheactorjs/value-objects'
 
 const $context = new URIValue('http://example.com/jsonld/some')
 
 function validateImmutableAggregate (aggregate) {
   ImmutableAggregateType(aggregate)
-  expect(aggregate.$id.equals(new URIValue('http://example.com/some-id'))).toEqual(true)
+  expect(aggregate.$id.equals(new ID('7e8edab4-3099-4499-af60-ab29e51dbb95', 'http://example.com/7e8edab4-3099-4499-af60-ab29e51dbb95'))).toEqual(true)
   expect(aggregate.$version).toEqual(17)
   expect(aggregate.$deleted).toEqual(false)
   expect(aggregate.$context.equals($context)).toEqual(true)
@@ -18,7 +18,7 @@ describe('ImmutableAggregate', () => {
   describe('constructor()', () => {
     it('should accept values', () => {
       const aggregate = new ImmutableAggregate({
-        $id: new URIValue('http://example.com/some-id'),
+        $id: new ID('7e8edab4-3099-4499-af60-ab29e51dbb95', 'http://example.com/7e8edab4-3099-4499-af60-ab29e51dbb95'),
         $version: 17,
         $context: $context,
         $createdAt: new Date('2016-01-01T00:00:00Z')
@@ -27,7 +27,7 @@ describe('ImmutableAggregate', () => {
     })
     it('should parse it\'s own values', () => {
       const aggregate = new ImmutableAggregate({
-        $id: new URIValue('http://example.com/some-id'),
+        $id: new ID('7e8edab4-3099-4499-af60-ab29e51dbb95', 'http://example.com/7e8edab4-3099-4499-af60-ab29e51dbb95'),
         $version: 17,
         $context: $context,
         $createdAt: new Date('2016-01-01T00:00:00Z')
@@ -45,7 +45,7 @@ describe('ImmutableAggregate', () => {
   describe('updated()', () => {
     it('should create a new instance', () => {
       const aggregate = new ImmutableAggregate({
-        $id: new URIValue('http://example.com/some-id'),
+        $id: new ID('7e8edab4-3099-4499-af60-ab29e51dbb95', 'http://example.com/7e8edab4-3099-4499-af60-ab29e51dbb95'),
         $version: 17,
         $context: $context,
         $createdAt: new Date('2016-01-01T00:00:00Z')
@@ -81,7 +81,7 @@ describe('ImmutableAggregate', () => {
           )
         }
       }
-      const s = new Some({foo: 'bar', $version: 1, $createdAt: new Date(), $id: new URIValue('http://example.com/some-id')})
+      const s = new Some({foo: 'bar', $version: 1, $createdAt: new Date(), $id: new ID('7e8edab4-3099-4499-af60-ab29e51dbb95', 'http://example.com/7e8edab4-3099-4499-af60-ab29e51dbb95')})
       const u = s.updated({foo: 'baz'})
       expect(s).not.toEqual(u)
       expect(u.$version).toEqual(2)
@@ -93,7 +93,7 @@ describe('ImmutableAggregate', () => {
   describe('updated()', () => {
     it('should create a new instance', () => {
       const aggregate = new ImmutableAggregate({
-        $id: new URIValue('http://example.com/some-id'),
+        $id: new ID('7e8edab4-3099-4499-af60-ab29e51dbb95', 'http://example.com/7e8edab4-3099-4499-af60-ab29e51dbb95'),
         $version: 17,
         $context: $context,
         $createdAt: new Date('2016-01-01T00:00:00Z')
@@ -110,7 +110,7 @@ describe('ImmutableAggregate', () => {
   describe('JSON', () => {
     it('should parse it\'s JSON representation', () => {
       const aggregate = ImmutableAggregate.fromJSON(JSON.parse(JSON.stringify(new ImmutableAggregate({
-        $id: new URIValue('http://example.com/some-id'),
+        $id: new ID('7e8edab4-3099-4499-af60-ab29e51dbb95', 'http://example.com/7e8edab4-3099-4499-af60-ab29e51dbb95'),
         $version: 17,
         $context: $context,
         $createdAt: new Date('2016-01-01T00:00:00Z')
@@ -126,7 +126,7 @@ describe('MaybeImmutableAggregateType', () => {
   })
   it('should accept correct value', () => {
     MaybeImmutableAggregateType(new ImmutableAggregate({
-      $id: new URIValue('http://example.com/some-id'),
+      $id: new ID('7e8edab4-3099-4499-af60-ab29e51dbb95', 'http://example.com/7e8edab4-3099-4499-af60-ab29e51dbb95'),
       $version: 1,
       $createdAt: new Date(),
       $context: new URIValue('http://example.com')
@@ -140,7 +140,7 @@ describe('MaybeImmutableAggregateJSONType', () => {
   })
   it('should accept correct value', () => {
     MaybeImmutableAggregateJSONType(new ImmutableAggregate({
-      $id: new URIValue('http://example.com/some-id'),
+      $id: new ID('7e8edab4-3099-4499-af60-ab29e51dbb95', 'http://example.com/7e8edab4-3099-4499-af60-ab29e51dbb95'),
       $version: 1,
       $createdAt: new Date(),
       $context: new URIValue('http://example.com')

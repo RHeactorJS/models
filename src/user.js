@@ -3,6 +3,7 @@ import { MaybeStringType, VersionNumberType, MaybeVersionNumberType, MaybeBoolea
 import {MaybeLinkListJSONType} from './link'
 import {EmailValue, EmailValueType, URIValue, MaybeURIValueType} from '@rheactorjs/value-objects'
 import {Any as AnyType, Boolean as BooleanType, dict, maybe, refinement, irreducible, struct} from 'tcomb'
+import { IDJSONType } from './id'
 const PreferencesType = dict(NonEmptyStringType, AnyType)
 
 const $context = new URIValue('https://github.com/RHeactorJS/models#User')
@@ -10,7 +11,7 @@ const $contextVersion = 2
 
 export class User extends ImmutableAggregate {
   /**
-   * @param {{$id: URIValue, $version: Number, $createdAt: Date|undefined, $updatedAt: Date|undefined, $deletedAt: Date|undefined, email: EmailValue, name: String|undefined, avatar: URIValue|undefined, superUser: Boolean|undefined, active: Boolean|undefined, preferences: Object|undefined}} fields
+   * @param {{$id: ID, $version: Number, $createdAt: Date|undefined, $updatedAt: Date|undefined, $deletedAt: Date|undefined, email: EmailValue, name: String|undefined, avatar: URIValue|undefined, superUser: Boolean|undefined, active: Boolean|undefined, preferences: Object|undefined}} fields
    */
   constructor (fields) {
     super(Object.assign(fields, {$context, $contextVersion}))
@@ -24,7 +25,7 @@ export class User extends ImmutableAggregate {
   }
 
   /**
-   * @returns {{$id: String, $version: Number, $context: String, $contextVersion: Number, $links: Array<Link>, $createdAt: String|undefined, $updatedAt: String|undefined, $deletedAt: String|undefined, email: String, name: String|undefined, avatar: String|undefined, superUser: Boolean|undefined, active: Boolean|undefined, preferences: String}}
+   * @returns {{$id: {uuid: String, url: String}, $version: Number, $context: String, $contextVersion: Number, $links: Array<Link>, $createdAt: String|undefined, $updatedAt: String|undefined, $deletedAt: String|undefined, email: String, name: String|undefined, avatar: String|undefined, superUser: Boolean|undefined, active: Boolean|undefined, preferences: String}}
    */
   toJSON () {
     return Object.assign(
@@ -41,7 +42,7 @@ export class User extends ImmutableAggregate {
   }
 
   /**
-   * @param {{$id: String, $context: String, $links: Array<Link>, $createdAt: String|undefined, $updatedAt: String|undefined, $deletedAt: String|undefined, email: String, name: String|undefined, avatar: String|undefined, superUser: Boolean|undefined, active: Boolean|undefined, preferences: String}} data
+   * @param {{$id: {uuid: String, url: String}, $context: String, $links: Array<Link>, $createdAt: String|undefined, $updatedAt: String|undefined, $deletedAt: String|undefined, email: String, name: String|undefined, avatar: String|undefined, superUser: Boolean|undefined, active: Boolean|undefined, preferences: String}} data
    * @returns {Entity}
    */
   static fromJSON (data) {
@@ -78,7 +79,7 @@ export const MaybeUserType = maybe(UserType)
 export const UserJSONType = struct({
   $context: refinement(NonEmptyStringType, s => s === User.$context.toString(), 'UserContext'),
   $contextVersion: MaybeVersionNumberType,
-  $id: NonEmptyStringType,
+  $id: IDJSONType,
   $version: VersionNumberType,
   $createdAt: NonEmptyStringType,
   $updatedAt: MaybeStringType,

@@ -1,16 +1,17 @@
-import {URIValue, URIValueType} from '@rheactorjs/value-objects'
-import {Model, ModelType} from './model'
+import { URIValue } from '@rheactorjs/value-objects'
+import { Model, ModelType } from './model'
 import { MaybeDateType, NonEmptyStringType } from './types'
-import {MaybeLinkListJSONType} from './link'
-import {maybe, irreducible, struct} from 'tcomb'
+import { MaybeLinkListJSONType } from './link'
+import { maybe, irreducible, struct } from 'tcomb'
+import { ID, IDJSONType, IDType } from './id'
 
 export class Entity extends Model {
   /**
-   * @param {{$id: URIValue, $context: URIValue, $createdAt: Date|undefined, $updatedAt: Date|undefined, $deletedAt: Date|undefined}} fields
+   * @param {{$id: ID, $context: URIValue, $createdAt: Date|undefined, $updatedAt: Date|undefined, $deletedAt: Date|undefined}} fields
    */
   constructor (fields) {
     super(fields)
-    this.$id = URIValueType(fields.$id, ['Entity', '$id:URIValue'])
+    this.$id = IDType(fields.$id, ['Entity', '$id:ID'])
     this.$createdAt = MaybeDateType(fields.$createdAt, ['Entity', '$createdAt:?Date'])
     this.$updatedAt = MaybeDateType(fields.$updatedAt, ['Entity', '$updatedAt:?Date'])
     this.$deletedAt = MaybeDateType(fields.$deletedAt, ['Entity', '$deletedAt:?Date'])
@@ -26,13 +27,13 @@ export class Entity extends Model {
   }
 
   /**
-   * @returns {{$id: String, $context: String, $links: Array<Link>, $createdAt: String|undefined, $updatedAt: String|undefined, $deletedAt: String|undefined}}
+   * @returns {{$id: {uuid: String, url: String}, $context: String, $links: Array<Link>, $createdAt: String|undefined, $updatedAt: String|undefined, $deletedAt: String|undefined}}
    */
   toJSON () {
     return Object.assign(
       super.toJSON(),
       {
-        $id: this.$id.toString(),
+        $id: this.$id.toJSON(),
         $createdAt: this.$createdAt ? this.$createdAt.toISOString() : undefined,
         $updatedAt: this.$updatedAt ? this.$updatedAt.toISOString() : undefined,
         $deletedAt: this.$deletedAt ? this.$deletedAt.toISOString() : undefined
@@ -41,14 +42,14 @@ export class Entity extends Model {
   }
 
   /**
-   * @param {{$id: String, $context: String, $links: Array<Link>, $createdAt: String|undefined, $updatedAt: String|undefined, $deletedAt: String|undefined}} data
+   * @param {{$id: {uuid: String, url: String}, $context: String, $links: Array<Link>, $createdAt: String|undefined, $updatedAt: String|undefined, $deletedAt: String|undefined}} data
    * @returns {Entity}
    */
   static fromJSON (data) {
     EntityJSONType(data)
     return new Entity(Object.assign(
       super.fromJSON(data), {
-        $id: new URIValue(data.$id),
+        $id: ID.fromJSON(data.$id),
         $context: new URIValue(data.$context),
         $createdAt: data.$createdAt ? new Date(data.$createdAt) : undefined,
         $updatedAt: data.$updatedAt ? new Date(data.$updatedAt) : undefined,
@@ -85,7 +86,7 @@ export const EntityType = irreducible('EntityType', x => {
 export const MaybeEntityType = maybe(EntityType)
 export const EntityJSONType = struct({
   $context: NonEmptyStringType,
-  $id: NonEmptyStringType,
+  $id: IDJSONType,
   $createdAt: maybe(NonEmptyStringType),
   $updatedAt: maybe(NonEmptyStringType),
   $deletedAt: maybe(NonEmptyStringType),

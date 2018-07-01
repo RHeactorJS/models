@@ -2,11 +2,12 @@ import {Entity, EntityType} from './entity'
 import {Date as DateType, Any as AnyType, dict, maybe, irreducible, struct} from 'tcomb'
 import { MaybeStringType, VersionNumberType, MaybeVersionNumberType, NonEmptyStringType } from './types'
 import {MaybeLinkListJSONType} from './link'
+import { IDJSONType } from './id'
 const PropsType = dict(NonEmptyStringType, AnyType)
 
 export class ImmutableAggregate extends Entity {
   /**
-   * @param {{$id: URIValue, $version: Number, $context: URIValue, $createdAt: Date, $updatedAt: Date|undefined, $deletedAt: Date|undefined}} fields
+   * @param {{$id: ID, $version: Number, $context: URIValue, $createdAt: Date, $updatedAt: Date|undefined, $deletedAt: Date|undefined}} fields
    */
   constructor (fields) {
     super(fields)
@@ -41,7 +42,7 @@ export class ImmutableAggregate extends Entity {
   }
 
   /**
-   * @returns {{$id: String, $version: Number, $context: String, $contextVersion: Number, $links: Array<Link>, $createdAt: String, $updatedAt: String|undefined, $deletedAt: String|undefined}}
+   * @returns {{$id: {uuid: String, url: String}, $version: Number, $context: String, $contextVersion: Number, $links: Array<Link>, $createdAt: String, $updatedAt: String|undefined, $deletedAt: String|undefined}}
    */
   toJSON () {
     return Object.assign(
@@ -53,7 +54,7 @@ export class ImmutableAggregate extends Entity {
   }
 
   /**
-   * @param {{$id: String, $context: String, $links: Array<Link>, $createdAt: String, $updatedAt: String|undefined, $deletedAt: String|undefined}} data
+   * @param {{$id: {uuid: String, url: String}, $context: String, $links: Array<Link>, $createdAt: String, $updatedAt: String|undefined, $deletedAt: String|undefined}} data
    * @returns {Entity}
    */
   static fromJSON (data) {
@@ -74,7 +75,7 @@ export const MaybeImmutableAggregateType = maybe(ImmutableAggregateType)
 export const ImmutableAggregateJSONType = struct({
   $context: NonEmptyStringType,
   $contextVersion: MaybeVersionNumberType,
-  $id: NonEmptyStringType,
+  $id: IDJSONType,
   $version: VersionNumberType,
   $createdAt: NonEmptyStringType,
   $updatedAt: MaybeStringType,
